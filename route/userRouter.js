@@ -2,13 +2,13 @@
 const express = require('express');
 
 //引入controller层
-const { userLogin } = require('../controller/userCtrl');
+const { userRegistered } = require('../controller/userCtrl');
 
 //使用express 的 Router 方法创建路由
 const userRouter = express.Router();
 
 //创建具体路由
-userRouter.post('/login',userLogin);
+userRouter.post('/api/registered',userRegistered);
 
 //导出路由
 module.exports = userRouter;
