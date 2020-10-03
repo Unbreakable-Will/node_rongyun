@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- // 引入 IM SDK -->
+    <script src="http://cdn.ronghub.com/RongIMLib-2.4.0.js"></script>
+    <!-- // 引入 RTC SDK -->
+    <script src="https://cdn.ronghub.com/RongRTC-3.0.4.js"></script>
+    <style>
+        video {
+            width: 48%;
+            margin: 1%;
+        }
+
+        div {
+            text-align: center;
+            padding: 10px;
+        }
+
+        button {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <button onclick="join()"> 加入房间 </button>
+        <button onclick="quit()"> 离开房间 </button>
+    </div>
+
+
+    <script src="./im.js"></script>
+    <script src="./rtc.js"></script>
+
+</body>
+
+</html>
