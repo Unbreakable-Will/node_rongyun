@@ -1,9 +1,22 @@
-const express = require("express");
-const app = express();
-const port = 5000;
+var express = require("express");
+var https = require("https");
+var http = require("http");
+var fs = require("fs");
 
-const path = require("path");
-app.use(express.static(path.join(__dirname, "public")));
+//同步读取密钥和签名证书
+var options = {
+  key: fs.readFileSync("./keys/server.key"),
+  cert: fs.readFileSync("./keys/server.crt"),
+};
 
-app.get("/", (req, res) => res.send("Hello World!"));
-app.listen(port, () => console.log(`Example app listening on port port!`));
+var app = express();
+var httpsServer = https.createServer(options, app);
+var httpServer = http.createServer(app);
+
+app.get("/", function (req, res, next) {
+  res.send("Hello Express+https");
+});
+//https监听3000端口
+httpsServer.listen(5200);
+//http监听3001端口
+httpServer.listen(5200);
