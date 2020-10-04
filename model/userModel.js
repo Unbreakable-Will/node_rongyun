@@ -6,14 +6,13 @@ module.exports.addUser = (data , callback) => {
     var values = '';
     //拼接数据
     for(let k in data){
-        values = "'"+data[k]+"',";
+        values += "'"+data[k]+"',";
     };
 
     //删除末尾,
     values = values.slice(0,-1);
-
     pool.query(`
-    INSERT INTO imweb_login(id, name, portrait, token_id, token) VALUES (${values})
+    INSERT INTO imweb_login(onlyId,code, meetingId, portrait, token, userId, username) VALUES (${values})
     ` 
     ,function(error,results){
         if(error) throw error;

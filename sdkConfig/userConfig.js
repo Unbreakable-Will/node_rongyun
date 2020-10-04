@@ -64,4 +64,7 @@ module.exports.registered = async function (id, name, portrait, callback) {
     );
     //   console.log(fanhui);
   };
+
+
+  
   
