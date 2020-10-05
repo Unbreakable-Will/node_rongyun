@@ -15,7 +15,7 @@ body {
 
     .boxcenter {
         width: 835px;
-
+        
         height: 500px;
         margin: 100px auto;
         background-color: #ffffff;
@@ -47,54 +47,5 @@ body {
     .invite {
         @extend .join;
     }
-}
 
-
-.join-box {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-
-    .join-content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-    }
-
-    .left {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        label {
-            display: block;
-            padding: 20px 0;
-        }
-    }
-
-    span {
-        color: #ffffff;
-    }
-
-    input {
-        border-radius: 20px;
-    }
-
-    .join-box-btn {
-        margin-top: 20px;
-    }
-
-    button {
-        // display: block;
-        width: 100px;
-        height: 70px;
-        border-radius: 20px;
-    }
 }

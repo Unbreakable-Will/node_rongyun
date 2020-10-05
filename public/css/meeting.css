@@ -688,12 +688,6 @@ body {
   min-width: 1280px;
 }
 
-html,
-body {
-  max-width: 1920px;
-  min-width: 1280px;
-}
-
 .top {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -755,6 +749,9 @@ body {
   margin-left: 0.04167rem;
   line-height: 0.15625rem;
   text-align: center;
+}
+
+.main .left .left-top .icon span {
   font-size: 0.08333rem;
 }
 
@@ -792,12 +789,36 @@ body {
 }
 
 .main .left .left-center {
+  position: relative;
   width: 100%;
   height: 4.24479rem;
   background-color: #fafafa;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.main .left .left-center .touxiang {
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  top: 250px;
+  left: 650px;
+}
+
+.main .left .left-center .touxiang img {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0%);
+          transform: translate(-50%, 0%);
+}
+
+.main .left .left-center .touxiang .member-name {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0%);
+          transform: translate(-50%, 0%);
 }
 
 .main .left .left-center .bottom-key {
@@ -814,26 +835,41 @@ body {
 }
 
 .main .left .left-center .bottom-key .box {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-left: 50px;
   width: 5.15625rem;
   height: 0.39062rem;
 }
 
 .main .left .left-center .bottom-key .box i {
-  margin-top: 0.08333rem;
-  margin-left: -0.13542rem;
-  margin-right: 0.13542rem;
+  position: absolute;
+  left: 70px;
+  top: -38px;
   width: 0rem;
-  height: 0rem;
+  height: 0.39062rem;
   border: 0.02604rem solid #000;
   border-left-color: transparent;
   border-right-color: transparent;
   border-top-color: transparent;
 }
 
+.main .left .left-center .bottom-key .box i:nth-child(4) {
+  left: 180px;
+}
+
+.main .left .left-center .bottom-key .box i:nth-child(6) {
+  left: 280px;
+}
+
+.main .left .left-center .bottom-key .box .key:hover {
+  background-color: #e0e2e5;
+}
+
 .main .left .left-center .bottom-key .box .key {
+  padding-top: 0.05208rem;
   width: 0.52083rem;
   height: 0.39062rem;
   font-size: 0.0625rem;
@@ -855,13 +891,18 @@ body {
   margin-left: 1.5625rem;
   width: 0.57292rem;
   height: 0.26042rem;
-  border: 1px solid #ff5151;
-  border-radius: 5px;
+  border: 0.00521rem solid #ff5151;
+  border-radius: 0.02604rem;
   text-align: center;
   line-height: 0.26042rem;
   font-weight: bold;
   color: #ff5151;
   font-size: 0.07292rem;
+}
+
+.main .left .left-center .bottom-key .end:hover {
+  color: #fff;
+  background-color: #ff5151;
 }
 
 .main .right {
@@ -871,7 +912,15 @@ body {
   font-size: 0.10938rem;
 }
 
-.main .right .top {
+.main .right .member {
+  display: none;
+  width: 2.39583rem;
+  height: 2.36979rem;
+  font-size: 0.10938rem;
+  border-bottom: 0.00521rem solid #ececec;
+}
+
+.main .right .member .member-top {
   width: 2.39583rem;
   height: 0.23438rem;
   background-color: #f6f6f6;
@@ -879,36 +928,185 @@ body {
   border-bottom: 0.00521rem solid #ced0d2;
   line-height: 0.23438rem;
   text-align: center;
-  font-size: 0.10938rem;
+  font-size: 0.0625rem;
 }
 
-.main .right .center {
+.main .right .member .member-search {
+  height: 0.30208rem;
+  width: 2.39583rem;
+  padding: 0 0.15625rem;
+}
+
+.main .right .member .member-search input {
+  width: 2.08333rem;
+  margin: 0.07292rem 0;
+  font-size: 0.0625rem;
+  height: 0.14583rem;
+  padding-left: 0.10417rem;
+}
+
+.main .right .member .member-list {
+  height: 1.51042rem;
+  width: 2.39583rem;
+  background-color: #fff;
+  padding-left: 0.14062rem;
+  border-bottom: 0.00521rem solid #ececec;
+}
+
+.main .right .member .member-list li {
+  width: 2.39583rem;
+  height: 0.25rem;
+  margin-bottom: 0.05208rem;
+}
+
+.main .right .member .member-list li .member-icon {
+  float: left;
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 50%;
+}
+
+.main .right .member .member-list li .member-icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.main .right .member .member-list li .member-name {
+  margin-top: 0.02604rem;
+  margin-left: 0.10417rem;
+  float: left;
+  font-size: 0.07292rem;
+}
+
+.main .right .member .member-list li .member-name .job {
+  color: #ccc;
+  font-size: 0.0625rem;
+}
+
+.main .right .member .member-list li .status {
+  float: right;
+  margin-right: 6 0rem;
+  margin-top: 0.05208rem;
+}
+
+.main .right .member .member-list li .status div:hover {
+  background-color: #1a8cff;
+}
+
+.main .right .member .member-list li .status div {
+  display: none;
+  float: left;
+  background-color: #006fff;
+  font-size: 0.0625rem;
+  padding: 0.02604rem;
+  color: #fff;
+  border-radius: 0.01042rem;
+  margin-right: 0.3125rem;
+  text-align: center;
+}
+
+.main .right .member .member-list li .status .status-mute {
+  width: 0.3125rem;
+  height: 0.125rem;
+  margin-right: 0.10417rem;
+}
+
+.main .right .member .member-list li .status .rename {
+  width: 0.29167rem;
+  height: 0.125rem;
+}
+
+.main .right .member .member-list li .status .icon-yuyinhuatong {
+  margin-right: 0.10417rem;
+}
+
+.main .right .member .member-list li .status span {
+  font-size: 0.10417rem;
+  margin-right: 0.3125rem;
+}
+
+.main .right .member .member-btn {
+  width: 2.39583rem;
+  height: 0.3125rem;
+  padding-left: 0.23438rem;
+}
+
+.main .right .member .member-btn div {
+  float: left;
+  background-color: #fff;
+  font-size: 0.0625rem;
+  padding: 0.02604rem;
+  color: #006fff;
+  border-radius: 0.01042rem;
+  margin-right: 0.3125rem;
+  text-align: center;
+  border: 0.00521rem solid #e4e5e6;
+  margin: 0;
+  margin-top: 0.07812rem;
+  margin-right: 0.16667rem;
+}
+
+.main .right .member .member-btn div i {
+  display: inline-block;
+  margin-left: 0.04167rem;
+  margin-right: 0.04167rem;
+  width: 0rem;
+  height: 0rem;
+  border: 0.02604rem solid #006fff;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  margin-top: 0.03125rem;
+}
+
+.main .right .member .member-btn div:hover {
+  background-color: #e0e2e5;
+}
+
+.main .right .chat {
+  float: left;
+  width: 2.39583rem;
+  height: 4.45312rem;
+  font-size: 0.0625rem;
+}
+
+.main .right .chat .top {
+  width: 2.39583rem;
+  height: 0.23438rem;
+  background-color: #f6f6f6;
+  border-top: 0.00521rem solid #ced0d2;
+  border-bottom: 0.00521rem solid #ced0d2;
+  line-height: 0.23438rem;
+  text-align: center;
+}
+
+.main .right .chat .center {
   height: 3.16667rem;
   width: 2.39583rem;
   background-color: #fff;
   border-bottom: 0.00521rem solid #e5e5e5;
 }
 
-.main .right .bottom {
+.main .right .chat .bottom {
   height: 1.25rem;
   width: 2.39583rem;
 }
 
-.main .right .bottom .bottom-top {
+.main .right .chat .bottom .bottom-top {
   height: 0.23438rem;
 }
 
-.main .right .bottom .bottom-top .top-text {
+.main .right .chat .bottom .bottom-top .top-text {
   float: left;
   line-height: 0.23438rem;
   font-weight: bold;
 }
 
-.main .right .bottom .bottom-top .top-text span {
+.main .right .chat .bottom .bottom-top .top-text span {
   color: #006fff;
 }
 
-.main .right .bottom .bottom-top .top-text .corner {
+.main .right .chat .bottom .bottom-top .top-text .corner {
   float: right;
   margin-top: 0.10417rem;
   width: 0rem;
@@ -919,7 +1117,7 @@ body {
   border-right-color: transparent;
 }
 
-.main .right .bottom .bottom-top .power {
+.main .right .chat .bottom .bottom-top .power {
   float: right;
   line-height: 0.23438rem;
   font-weight: bold;
@@ -927,7 +1125,7 @@ body {
   margin-right: 0.15625rem;
 }
 
-.main .right .bottom .bottom-top .power .corner {
+.main .right .chat .bottom .bottom-top .power .corner {
   float: right;
   margin-top: 0.10417rem;
   width: 0rem;
@@ -938,11 +1136,253 @@ body {
   border-right-color: transparent;
 }
 
-.main .right .bottom .bottom-text textarea {
+.main .right .chat .bottom .bottom-text {
+  width: 2.34375rem;
+  height: 0.72917rem;
+  padding: 0.02083rem;
+}
+
+.main .right .chat .bottom .bottom-text textarea {
   margin: 0rem;
-  width: 2.41146rem;
-  height: 0.80729rem;
+  width: 100%;
+  height: 100%;
   border: none;
   outline: none;
   font-size: 0.0625rem;
+  resize: none;
 }
+
+.main .right .chat .bottom .bottom-text .fasong {
+  color: #006fff;
+}
+
+.main .right .chat .bottom .bottom-text span {
+  float: right;
+  color: #888888;
+  font-size: 0.0625rem;
+  margin-right: 0.10417rem;
+}
+
+.main .right .chat .bottom .bottom-text span t {
+  color: #888888;
+}
+
+.main .right .chat .bottom .bottom-text span span {
+  color: #888888;
+  line-height: 0.02604rem;
+  margin-left: 0.05208rem;
+  padding-left: 0.05208rem;
+  margin-top: 0.03646rem;
+  font-size: 0.0625rem;
+}
+
+.box-click .left1-click {
+  display: none;
+  width: 2.16146rem;
+  height: 0.91146rem;
+  background-color: #fff;
+  position: absolute;
+  left: 0;
+  top: 0.54688rem;
+  padding-left: 0.08333rem;
+  -webkit-box-shadow: 0.01042rem 0.01042rem 0.02604rem #888888;
+          box-shadow: 0.01042rem 0.01042rem 0.02604rem #888888;
+}
+
+.box-click .left1-click .title {
+  margin-top: 0.07292rem;
+  font-size: 0.0625rem;
+  font-weight: bold;
+  margin-bottom: 0.05208rem;
+}
+
+.box-click .left1-click .title-main {
+  font-size: 0.0625rem;
+  color: #cecece;
+  margin-bottom: 0.05208rem;
+}
+
+.box-click .left1-click span {
+  position: absolute;
+  left: 0.52083rem;
+  color: #000;
+  margin-top: -0.13542rem;
+}
+
+.box-click .key7-click {
+  display: none;
+  position: absolute;
+  bottom: 0.625rem;
+  left: 3.28125rem;
+  width: 0.52083rem;
+  height: 0.28125rem;
+  -webkit-box-shadow: 0.01042rem 0.01042rem 0.02604rem #888888;
+          box-shadow: 0.01042rem 0.01042rem 0.02604rem #888888;
+  background-color: #fff;
+}
+
+.box-click .key7-click div {
+  line-height: 0.13542rem;
+  font-size: 0.0625rem;
+  margin-left: 0.10417rem;
+}
+
+.box-click .key4-click {
+  display: none;
+  position: absolute;
+  left: 1.5625rem;
+  bottom: 0.625rem;
+  width: 0.88542rem;
+  height: 1.71875rem;
+  background-color: #fff;
+  -webkit-box-shadow: 0.01042rem 0.01042rem 0.02604rem #888888;
+          box-shadow: 0.01042rem 0.01042rem 0.02604rem #888888;
+  padding-top: 0.05208rem;
+}
+
+.box-click .key4-click li:first-child {
+  color: #c9cbcc;
+}
+
+.box-click .key4-click li {
+  text-align: left;
+  line-height: 0.125rem;
+  font-size: 0.0625rem;
+}
+
+.box-click .key4-click li span {
+  display: inline-block;
+  font-size: 0.0625rem;
+  width: 0.10417rem;
+  margin: 0 0.05208rem;
+}
+
+.box-click .share {
+  display: none;
+  position: absolute;
+  left: 248px;
+  bottom: 105px;
+  width: 0.88542rem;
+  height: 0.52083rem;
+  background-color: #fff;
+  -webkit-box-shadow: -1px -1px 15px #888888;
+          box-shadow: -1px -1px 15px #888888;
+  padding-top: 0.05208rem;
+}
+
+.box-click .share i {
+  position: absolute;
+  width: 0rem;
+  height: 0rem;
+  border: 0.05208rem solid #fff;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  left: 50%;
+  margin-left: -10px;
+  bottom: -20px;
+}
+
+.box-click .share li:first-child {
+  color: #c9cbcc;
+}
+
+.box-click .share li {
+  text-align: left;
+  line-height: 0.125rem;
+  font-size: 0.0625rem;
+}
+
+.box-click .share li span {
+  display: inline-block;
+  font-size: 0.0625rem;
+  width: 0.10417rem;
+  margin: 0 0.05208rem;
+}
+
+.box-click .camera {
+  display: none;
+  position: absolute;
+  left: 124px;
+  bottom: 105px;
+  width: 1.14583rem;
+  height: 0.67708rem;
+  background-color: #fff;
+  -webkit-box-shadow: -1px -1px 15px #888888;
+          box-shadow: -1px -1px 15px #888888;
+  padding-top: 0.05208rem;
+}
+
+.box-click .camera i {
+  position: absolute;
+  width: 0rem;
+  height: 0rem;
+  border: 0.05208rem solid #fff;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  left: 50%;
+  margin-left: -10px;
+  bottom: -20px;
+}
+
+.box-click .camera li:first-child {
+  color: #939699;
+}
+
+.box-click .camera li {
+  text-align: left;
+  line-height: 0.125rem;
+  font-size: 0.0625rem;
+}
+
+.box-click .camera li span {
+  display: inline-block;
+  font-size: 0.0625rem;
+  width: 0.10417rem;
+  margin: 0 0.05208rem;
+}
+
+.box-click .mute {
+  display: none;
+  position: absolute;
+  left: 15px;
+  bottom: 105px;
+  width: 1.14583rem;
+  height: 1.45833rem;
+  background-color: #fff;
+  -webkit-box-shadow: -1px -1px 15px #888888;
+          box-shadow: -1px -1px 15px #888888;
+  padding-top: 0.05208rem;
+}
+
+.box-click .mute i {
+  position: absolute;
+  width: 0rem;
+  height: 0rem;
+  border: 0.05208rem solid #fff;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  left: 50%;
+  margin-left: -10px;
+  bottom: -20px;
+}
+
+.box-click .mute li:first-child {
+  color: #939699;
+}
+
+.box-click .mute li {
+  text-align: left;
+  line-height: 0.125rem;
+  font-size: 0.0625rem;
+}
+
+.box-click .mute li span {
+  display: inline-block;
+  font-size: 0.0625rem;
+  width: 0.10417rem;
+  margin: 0 0.05208rem;
+}
+/*# sourceMappingURL=meeting.css.map */

@@ -5,9 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>会议页面</title>
-    <link rel="stylesheet" href="./css/meeting.css">
-    <script src="./lib/jquery-2.0.min.js"></script>
-    <script src="./lib/flexible.js"></script>
+    <link rel="stylesheet" href="/css/meeting.css">
+    <script src="/lib/jquery-2.0.min.js"></script>
+    <script src="/lib/flexible.js"></script>
+
+    <!-- HTTP -->
+    <script src="http://cdn.ronghub.com/RongIMLib-3.0.0-dev.js"></script>
+    <!-- HTTPS -->
+    <script src="https://cdn.ronghub.com/RongIMLib-3.0.0-dev.js"></script>
+    <!-- 压缩版 -->
+    <script src="https://cdn.ronghub.com/RongIMLib-3.0.0-dev.min.js"></script>
 </head>
 
 <body>
@@ -81,12 +88,13 @@
                     </div>
                 </div>
                 <div class="bottom-text">
-                    <textarea placeholder="请输入消息..."></textarea>
+                    <textarea placeholder="请输入消息..." id="userText"></textarea>
                 </div>
             </div>
         </div>
     </div>
 </body>
-<script src="./js/meeting.js"></script>
+<script src="/js/meeting.js"></script>
+<script src="/lib/setting.js"></script>
 
 </html>

@@ -1,10 +1,11 @@
 const urlencode = require('urlencode');
 
-//引入
+//引入user模块
 const {
   getUserToken,
-  registered
-} = require('../sdkConfig/userConfig');
+  registered,
+  createChatroom
+} = require('../sdkConfig/user');
 const {
   addUser
 } = require('../model/userModel');
@@ -85,4 +86,26 @@ module.exports.userRegistered = (req, res) => {
 
   //     res.send('请求成功');
   // });
+}
+
+
+// 获取用户数据
+module.exports.getUserInfo = (req, res) => {
+  // console.log(req.session.user);
+  //
+  let meetingId = req.body.url;
+  console.log(meetingId);
+  req.session.user.chatRoom = createChatroom(meetingId);
+  // console.log(createChatroom(meetingId));
+  // createChatroom(meetingId);
+  res.send({
+    code: 200,
+    data: req.session.user,
+  });
+};
+
+
+module.exports.meetings = (req, res) => {
+  // console.log(req.session.user);
+  res.render("meeting.html");
 }

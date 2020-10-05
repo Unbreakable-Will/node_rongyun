@@ -67,4 +67,21 @@ module.exports.registered = async function (id, name, portrait, callback) {
 
 
   
+/**
+ * 聊天室
+ * @param {string} meetingID 传入url获取到的会议id
+ * 
+ */
+module.exports.createChatroom = async function (meetingID) {
+  var Chatroom = RongSDK.Chatroom;
+  var chatroomInfo = {
+    id: meetingID, //聊天室id
+    name: "", //聊天室名称
+  };
+  let result = await Chatroom.create(chatroomInfo);
+  // 返回创建的聊天室id和名称
+  result.chatroomInfo = result;
+  // console.log(result);
+  return result;
+};
   
