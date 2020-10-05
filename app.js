@@ -79,4 +79,4 @@ app.use('/user',userRouter);
 
 
 //监听指定端口  开启服务
-app.listen(port, () => console.log(`https://www.wanlum.com:${port}`));
+app.listen(port, () => console.log(`https://www.wanlum.com`));
