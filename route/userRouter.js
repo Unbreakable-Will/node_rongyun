@@ -8,13 +8,13 @@ const { userRegistered , getUserInfo , meetings } = require('../controller/userC
 const userRouter = express.Router();
 
 //创建具体路由
-userRouter.post('/api/registered',userRegistered);
+userRouter.post('/registered',userRegistered);
 
 // 获取用户数据
-userRouter.post("/api/getUserInfo",getUserInfo);
+userRouter.post("/getUserInfo",getUserInfo);
 
 //会议页面渲染
-userRouter.get("/api/meeting", meetings);
+userRouter.get("/meeting", meetings);
 
 //导出路由
 module.exports = userRouter;

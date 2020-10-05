@@ -23,7 +23,7 @@ module.exports.getTouXiang = function (nickname, callback) {
         let touXiangURL = response.config.url;
         //   console.log(response);
         //   console.log(response.config.url);
-        callback(response.config.url);
+        callback(touXiangURL);
       })
       .catch((error) => {
         //   console.log(error);

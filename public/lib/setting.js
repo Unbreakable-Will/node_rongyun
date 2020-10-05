@@ -5,7 +5,7 @@ $(function () {
   $.ajax({
     async: false,
     type: "post",
-    url: "/api/registered",
+    url: "/user/registered",
     data: {
       username: getQueryString("username"), //用户自定义名称
       meetingId: getQueryString("meetingId"),
@@ -101,7 +101,7 @@ $(function () {
     //改同步函数
     async: false,
     type: "post",
-    url: "/api/getUserInfo",
+    url: "/user/getUserInfo",
     data: {
       //传入url中的key
       url: getQueryString("meetingId"),

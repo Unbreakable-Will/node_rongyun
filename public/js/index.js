@@ -3,7 +3,6 @@ $(function () {
     // 加入会议按钮
     $("#join").click(function (e) {
       e.preventDefault();
-      console.log(2);
       $(".join-box").show();
     });
   
@@ -14,13 +13,14 @@ $(function () {
       if (result) {
         $.ajax({
           type: "post",
-          url: "/api/registered",
+          url: "/user/registered",
           data: result,
           success: function (response) {
             console.log(response);
             if (response.code == 200) {
               window.rongYunUserInfo = response;
-              location.href = `/user/meeting?userId=${response.userId}&username=${response.username}&meetingId=${response.meetingId}&portrait=${response.portrait}`;
+              console.log(response);
+              location.href = `/user/meeting?userId=${response.userId}&username=${response.username}&meetingId=${response.meetingId}&portrait=${response.touXiang}`;
             }
           },
         });

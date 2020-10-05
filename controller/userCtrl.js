@@ -2,7 +2,6 @@ const urlencode = require('urlencode');
 
 //引入user模块
 const {
-  getUserToken,
   registered,
   createChatroom
 } = require('../sdkConfig/user');
@@ -24,8 +23,6 @@ module.exports.userRegistered = (req, res) => {
   //用户唯一id
   let id = generateMixed(6);
 
-  let user = {};
-
   //得到用户头像
   getTouXiang(urlencode(req.body.username), function (touXiangURL) {
     //调用融云SDK获取Token
@@ -41,51 +38,31 @@ module.exports.userRegistered = (req, res) => {
       //   userId: "HWVMP4", // 融云返回的用户id
       //   username: "200", // 用户自己输入的用户id
       // };
-      user = {
+      let user = {
         //用户唯一id
-        onlyId : id,
+        onlyId: id,
         //状态码
-        code : result.code,
+        code: result.code,
         //加入会议ID
-        meetingId : req.body.meetingId,
+        meetingId: req.body.meetingId,
         //用户头像
         touXiang: touXiangURL,
         //token
         token: result.token,
         //融云返回的用户id
-        userId : result.userId,
+        userId: result.userId,
         //用户id
         username: req.body.username,
       }
-
-      // 将值添加到数据库中
-      addUser(user, function (results) {
-        console.log('添加成功');
-      });
-
-      res.send(result);
+      //添加到session中
+      req.session.user = user;
+      //发送 
+      return res.send(user);
     });
+
   });
 
 
-  //     id: 'ujadk90ha',
-  //     name: 'Maritn',
-  //     portrait: 'http://7xogjk.com1.z0.glb.clouddn.com/IuDkFprSQ1493563384017406982'
-
-
-  // //创建对象
-  // let user = {
-  //     id: 'ujadk90ha',
-  //     name: 'Maritn', 
-  //     portrait: 'http://7xogjk.com1.z0.glb.clouddn.com/IuDkFprSQ1493563384017406982'
-  // }
-
-  // //调用函数 获取token
-  // getUserToken(user,function(results){
-  //     console.log(results);
-
-  //     res.send('请求成功');
-  // });
 }
 
 
@@ -94,7 +71,7 @@ module.exports.getUserInfo = (req, res) => {
   // console.log(req.session.user);
   //
   let meetingId = req.body.url;
-  console.log(meetingId);
+  console.log(req.body.url);
   req.session.user.chatRoom = createChatroom(meetingId);
   // console.log(createChatroom(meetingId));
   // createChatroom(meetingId);
@@ -107,5 +84,9 @@ module.exports.getUserInfo = (req, res) => {
 
 module.exports.meetings = (req, res) => {
   // console.log(req.session.user);
+  //添加到数据库中
+  addUser(req.session.user, function (results) {
+    console.log('添加成功');
+  });
   res.render("meeting.html");
 }
