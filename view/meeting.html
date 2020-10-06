@@ -9,12 +9,23 @@
     <script src="/lib/jquery-2.0.min.js"></script>
     <script src="/lib/flexible.js"></script>
 
-    <!-- HTTP -->
-    <script src="http://cdn.ronghub.com/RongIMLib-3.0.0-dev.js"></script>
-    <!-- HTTPS -->
-    <script src="https://cdn.ronghub.com/RongIMLib-3.0.0-dev.js"></script>
-    <!-- 压缩版 -->
-    <script src="https://cdn.ronghub.com/RongIMLib-3.0.0-dev.min.js"></script>
+
+    <!-- /* IMLib SDK 压缩版 */ -->
+    <script src="https://cdn.ronghub.com/RongIMLib-2.5.12.min.js"></script>
+    <!-- HTTP 版-->
+    <!-- /* RTCLib SDK 压缩版 */ -->
+    <script src="https://cdn.ronghub.com/RongRTC-3.2.5.min.js"></script>
+
+    <!-- /* CallLib SDK 压缩版 */ -->
+    <script src="https://cdn.ronghub.com/RongCallLib-3.1.7.min.js"></script>
+
+    <style>
+        video {
+            width: 48%;
+            margin: 1%;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -79,7 +90,7 @@
         </div>
         <div class="right">
             <div class="top"> 聊天 </div>
-            <div class="center"></div>
+            <div class="center" id="fang"></div>
             <div class="bottom">
                 <div class="bottom-top">
                     <div class="top-text"> 发送至: <span>所有人 <div class="corner"></div></span>
@@ -96,5 +107,7 @@
 </body>
 <script src="/js/meeting.js"></script>
 <script src="/lib/setting.js"></script>
+<script src="/lib/rongyunCall.js"></script>
+<script src="/lib/RongyunRtc.js"></script>
 
 </html>

@@ -1,7 +1,7 @@
 //替换成您自己的 Appkey
-const appkey = 'bmdehs6pbadts';
+const appkey = 'cpj2xarlchlzn';
 // 替换成您自己的 Secret
-const secret = 'Ly4MH0OcTQw';
+const secret = 'xRVdSzJcz7ss';
 
 //调用SDK文档
 var RongSDK = require('rongcloud-sdk')({

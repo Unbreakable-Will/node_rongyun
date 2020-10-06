@@ -1,16 +1,13 @@
 //创建 express 框架
 const express = require("express");
+//创建服务
+const app = express();
 const path = require("path");
-const axios = require("axios");
-//解决中文问题
-const urlencode = require("urlencode");
 //导入ejs模块
 var ejs = require("ejs");
 const session = require("express-session");
 
 
-//创建服务
-const app = express();
 
 //导入路由
 const userRouter = require('./route/userRouter');

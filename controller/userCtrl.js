@@ -20,8 +20,9 @@ const {
 module.exports.userRegistered = (req, res) => {
 
   //用户注册
-  //用户唯一id
+  //用户后台生成的userId
   let id = generateMixed(6);
+
 
   //得到用户头像
   getTouXiang(urlencode(req.body.username), function (touXiangURL) {
@@ -38,9 +39,12 @@ module.exports.userRegistered = (req, res) => {
       //   userId: "HWVMP4", // 融云返回的用户id
       //   username: "200", // 用户自己输入的用户id
       // };
+
+
       let user = {
+
         //用户唯一id
-        onlyId: id,
+        onlyId: generateMixed(6),
         //状态码
         code: result.code,
         //加入会议ID
@@ -69,9 +73,8 @@ module.exports.userRegistered = (req, res) => {
 // 获取用户数据
 module.exports.getUserInfo = (req, res) => {
   // console.log(req.session.user);
-  //
   let meetingId = req.body.url;
-  console.log(req.body.url);
+  // console.log(req.body.url);
   req.session.user.chatRoom = createChatroom(meetingId);
   // console.log(createChatroom(meetingId));
   // createChatroom(meetingId);
@@ -81,7 +84,7 @@ module.exports.getUserInfo = (req, res) => {
   });
 };
 
-
+//会议页面渲染
 module.exports.meetings = (req, res) => {
   // console.log(req.session.user);
   //添加到数据库中
