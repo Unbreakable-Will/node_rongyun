@@ -9,7 +9,8 @@ const {
 const {
   addUser,
   findMeetingId,
-  findMeetingUser
+  findMeetingUser,
+  findCountUser
 } = require('../model/userModel');
 
 //导入方法
@@ -73,43 +74,55 @@ module.exports.userRegistered = (req, res) => {
 
 
 //加入会议
-module.exports.userJoins = (req,res) => {
+module.exports.userJoins = (req, res) => {
   //获取数据
-  let { meetingId } = req.body;
+  let {
+    meetingId
+  } = req.body;
 
   //查询数据库  找到meetingId相同的会议
-  findMeetingId(meetingId , (results) => {
-      if(results){
-          return res.send({
-            code : 200,
-            msg : '加入成功',
-          });
-      }else{
-        return res.send({
-          code : 400,
-          msg : '加入失败',
-        });
-      }
+  findMeetingId(meetingId, (results) => {
+    if (results) {
+      return res.send({
+        code: 200,
+        msg: '加入成功',
+      });
+    } else {
+      return res.send({
+        code: 400,
+        msg: '加入失败',
+      });
+    }
   });
 }
 
 
 //显示会议中人员列表
-module.exports.showUsers = (req,res) => {
+module.exports.showUsers = (req, res) => {
   //获取会议id
-  let { meetingId } = req.query;
+  let {
+    meetingId
+  } = req.query;
+
 
   //查询数据库中  所有meetingId相同的人员
-  findMeetingUser(meetingId , function(results){
-    return res.send({
-      code : 200,
-      msg : '人员获取成功',
-      result : results
-    })  
-  })
+  findMeetingUser(meetingId, function (results) {
+    let list = {};
+    list.users = results;
+    //查询数据库中 所有meetingId相同人员个数
+    findCountUser(meetingId, (results) => {
+      list.count = results;
+    })
 
-  
+    console.log(list);
+    return res.send({
+      code: 200,
+      msg: '人员数据获取成功',
+      result: list
+    })
+  })
 }
+
 
 
 
@@ -126,6 +139,8 @@ module.exports.getUserInfo = (req, res) => {
     data: req.session.user,
   });
 };
+
+
 
 
 
