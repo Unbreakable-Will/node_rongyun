@@ -5,9 +5,13 @@ const {
   registered,
   createChatroom
 } = require('../sdkConfig/user');
+
 const {
-  addUser
+  addUser,
+  findMeetingId,
+  findMeetingUser
 } = require('../model/userModel');
+
 //导入方法
 const {
   generateMixed,
@@ -16,7 +20,7 @@ const {
 
 
 //导出方法
-//注册功能
+//创建会议
 module.exports.userRegistered = (req, res) => {
 
   //用户注册
@@ -65,9 +69,48 @@ module.exports.userRegistered = (req, res) => {
     });
 
   });
-
-
 }
+
+
+//加入会议
+module.exports.userJoins = (req,res) => {
+  //获取数据
+  let { meetingId } = req.body;
+
+  //查询数据库  找到meetingId相同的会议
+  findMeetingId(meetingId , (results) => {
+      if(results){
+          return res.send({
+            code : 200,
+            msg : '加入成功',
+          });
+      }else{
+        return res.send({
+          code : 400,
+          msg : '加入失败',
+        });
+      }
+  });
+}
+
+
+//显示会议中人员列表
+module.exports.showUsers = (req,res) => {
+  //获取会议id
+  let { meetingId } = req.query;
+
+  //查询数据库中  所有meetingId相同的人员
+  findMeetingUser(meetingId , function(results){
+    return res.send({
+      code : 200,
+      msg : '人员获取成功',
+      result : results
+    })  
+  })
+
+  
+}
+
 
 
 // 获取用户数据
@@ -83,6 +126,9 @@ module.exports.getUserInfo = (req, res) => {
     data: req.session.user,
   });
 };
+
+
+
 
 //会议页面渲染
 module.exports.meetings = (req, res) => {

@@ -72,7 +72,7 @@ const port = 5555;
 //用户管理
 app.use('/user',userRouter);
 //连接管理
-// app.use('/connect',connectRouter);
+// app.use('/conversation',connectRouter);
 
 
 //监听指定端口  开启服务

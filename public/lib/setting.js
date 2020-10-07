@@ -1,173 +1,151 @@
 $(function () {
   // IMLib SDK初始化
-
-  var appkey = "cpj2xarlchlzn";
-  RongIMLib.RongIMClient.init(appkey);
-
-  //状态监听器
-  RongIMClient.setConnectionStatusListener({
-    onChanged: function (status) {
-      // status 标识当前连接状态
-      switch (status) {
-        case RongIMLib.ConnectionStatus.CONNECTED:
-          console.log("链接成功");
-          break;
-        case RongIMLib.ConnectionStatus.CONNECTING:
-          console.log("正在链接");
-          break;
-        case RongIMLib.ConnectionStatus.DISCONNECTED:
-          console.log("断开连接");
-          break;
-        case RongIMLib.ConnectionStatus.KICKED_OFFLINE_BY_OTHER_CLIENT:
-          console.log("其他设备登录, 本端被踢");
-          break;
-        case RongIMLib.ConnectionStatus.DOMAIN_INCORRECT:
-          console.log("域名不正确, 请至开发者后台查看安全域名配置");
-          break;
-        case RongIMLib.ConnectionStatus.NETWORK_UNAVAILABLE:
-          console.log("网络不可用, 此时可调用 reconnect 进行重连");
-          break;
-        default:
-          console.log("链接状态为", status);
-          break;
-      }
-    },
-  });
-  //消息监听器
-  RongIMClient.setOnReceiveMessageListener({
-    // 接收到的消息
-    onReceived: function (message) {
-      var messageContent = message.content;
-      // 判断消息类型
-      switch (message.messageType) {
-        case RongIMClient.MessageType.TextMessage: // 文字消息
-          console.log("文字内容", messageContent.content);
-          break;
-        case RongIMClient.MessageType.ImageMessage: // 图片消息
-          console.log("图片缩略图 base64", messageContent.content);
-          console.log("原图 url", messageContent.imageUri);
-          break;
-        case RongIMClient.MessageType.HQVoiceMessage: // 音频消息
-          console.log("音频 type ", messageContent.type); // 编解码类型，默认为 aac 音频
-          console.log("音频 url", messageContent.remoteUrl); // 播放：<audio src={remoteUrl} />
-          console.log("音频 时长", messageContent.duration);
-          break;
-        case RongIMClient.MessageType.RichContentMessage: // 富文本(图文)消息
-          console.log("文本内容", messageContent.content);
-          console.log("图片 base64", messageContent.imageUri);
-          console.log("原图 url", messageContent.url);
-          break;
-        case RongIMClient.MessageType.UnknownMessage: // 未知消息
-          console.log("未知消息, 请检查消息自定义格式是否正确", message);
-          break;
-        default:
-          console.log("收到消息", message);
-          break;
-      }
-    },
+  var im = RongIMLib.init({
+    appkey: "cpj2xarlchlzn",
   });
 
-  $.ajax({
-    async: false,
-    type: "post",
-    url: "/user/getUserInfo",
-    data: null,
-    success: function (response) {
-      console.log(response);
-    },
-  });
+  // $.ajax({
+  //   async: false,
+  //   type: "post",
+  //   url: "/api/getUserInfo",
+  //   data: null,
+  //   success: function (response) {
+  //     console.log(response);
+  //   },
+  // });
 
-  var token =
+  let token =
     getQueryVariable("token") + "=@sw4u.cn.rongnav.com;sw4u.cn.rongcfg.com";
 
-  //连接接口
-  RongIMClient.connect(token, {
-    onSuccess: function (userId) {
-      console.log("连接成功, 用户 id 为", userId);
-      // 连接已成功, 此时可通过 getConversationList 获取会话列表并展示
-      // 加入聊天室  通过url获取
-      //   joinChatRoom(getQueryVariable("meetingId"));
+  // 设置监听
+  var conversationList = []; // 当前已存在的会话列表
+  im.watch({
+    conversation: function (event) {
+      var updatedConversationList = event.updatedConversationList; // 更新的会话列表
+      console.log("更新会话汇总:", updatedConversationList);
+      console.log(
+        "最新会话列表:",
+        im.Conversation.merge({
+          conversationList: conversationList,
+          updatedConversationList: updatedConversationList,
+        })
+      );
     },
-    onTokenIncorrect: function () {
-      console.log("连接失败, 失败原因: token 无效");
+    message: function (event) {
+      var message = event.message;
+      console.log("收到新消息", message);
     },
-    onError: function (errorCode) {
-      var info = "";
-      switch (errorCode) {
-        case RongIMLib.ErrorCode.TIMEOUT:
-          info = "链接超时";
+    status: function (event) {
+      var status = event.status;
+      switch (status) {
+        case RongIMLib.CONNECTION_STATUS.CONNECTED:
+          console.log("链接成功");
           break;
-        case RongIMLib.ConnectionState.UNACCEPTABLE_PAROTOCOL_VERSION:
-          info = "不可接受的协议版本";
+        case RongIMLib.CONNECTION_STATUS.CONNECTING:
+          console.log("正在连接中");
           break;
-        case RongIMLib.ConnectionState.IDENTIFIER_REJECTED:
-          info = "appkey 不正确";
+        case RongIMLib.CONNECTION_STATUS.DISCONNECTED:
+          console.log("已主动断开连接");
           break;
-        case RongIMLib.ConnectionState.SERVER_UNAVAILABLE:
-          info = "服务器不可用";
+        case RongIMLib.CONNECTION_STATUS.NETWORK_UNAVAILABLE:
+          console.log("网络不可用"); // SDK 内部会自动进行重连
+          break;
+        case RongIMLib.CONNECTION_STATUS.SOCKET_ERROR:
+          console.log("Socket 链接错误"); // SDK 内部会自动进行重连
+          break;
+        case RongIMLib.CONNECTION_STATUS.KICKED_OFFLINE_BY_OTHER_CLIENT:
+          console.log("其他设备登录, 本端被踢"); // 己端被踢, 不可进行重连. 否则会造成多端循环互踢
+          break;
+        case RongIMLib.CONNECTION_STATUS.BLOCKED:
+          console.log("链接断开, 用户已被封禁");
           break;
         default:
-          info = errorCode;
+          console.log("链接状态变化为:", status);
           break;
       }
-      console.log("连接失败, 失败原因: ", info);
     },
   });
 
-  //#region 融云方法存放
-  /**
-   *
-   *
-   * @param {string} chatRoomId 传入字符串 加入聊天
-   */
-  function joinChatRoom(chatRoomId) {
-    // var chatRoomId = "2312asd";
-    var count = 10;
-    RongIMClient.getInstance().joinChatRoom(chatRoomId, count, {
-      onSuccess: function () {
-        console.log("加入聊天室成功:", chatRoomId);
-      },
-      onError: function (error) {
-        console.log("加入聊天室失败", error);
-      },
+  //连接接口
+  let user = {
+    token: token,
+  };
+  im.connect(user)
+    .then(function (user) {
+      console.log("链接成功, 链接用户 id 为: ", user.id);
+      joinChatRoom();
+      getChatRoomMessages();
+      getChatRoomInfo();
+    })
+    .catch(function (error) {
+      console.log("链接失败: ", error.code, error.msg);
     });
+
+  //#region聊天室模块
+
+  //聊天室模块初始化
+  let chatRoom = im.ChatRoom.get({
+    id: getQueryVariable("meetingId"),
+  });
+
+  /**
+   *  加入聊天室
+   */
+  function joinChatRoom() {
+    chatRoom
+      .join({
+        count: 20, // 进入后, 自动拉取 20 条聊天室最新消息
+      })
+      .then(function () {
+        console.log("加入聊天室成功");
+      });
   }
+  $("#userText").keypress(function (e) {
+    if (e.keyCode == 13) {
+      sendChatRoom("123");
+    }
+  });
+
   /**
    *
-   *
-   * @param {string} chatRoomId 退出聊天室
+   * @param {string} userText  发送的文本内容
    */
-  function exitChatRoom(chatRoomId) {
-    RongIMClient.getInstance().quitChatRoom(chatRoomId, {
-      onSuccess: function () {
-        console.log("退出聊天室成功");
-      },
-      onError: function (error) {
-        console.log("退出聊天室失败");
-      },
-    });
+  function sendChatRoom(userText) {
+    chatRoom
+      .send({
+        messageType: RongIMLib.MESSAGE_TYPE.TEXT, // 'RC:TxtMsg'
+        content: {
+          content: userText, // 发送文本内容
+        },
+      })
+      .then(function (message) {
+        console.log("发送文字消息成功", message);
+      });
   }
+
   /**
-   *聊天室消息发送
    *
+   * 得到聊天室的历史消息
    */
-  function sendMessageToChatroom() {
-    var content = {
-      content: "hello，time：" + new Date().getTime(),
-      extra: "RongCloud",
+  function getChatRoomMessages() {
+    var option = {
+      timestrap: +new Date(),
+      count: 20,
     };
-
-    var conversationType = RongIMLib.ConversationType.CHATROOM; // 私聊
-    var msg = new RongIMLib.TextMessage(content);
-
-    var start = new Date().getTime();
-    instance.sendMessage(conversationType, chatRoomId, msg, {
-      onSuccess: function (message) {
-        showResult("发送聊天室消息成功", message, start);
-      },
-      onError: function (errorCode, message) {
-        showResult("发送聊天室消息失败", message, start);
-      },
+    chatRoom.getMessages(option).then(function (result) {
+      var list = result.list; // 历史消息列表
+      var hasMore = result.hasMore; // 是否还有历史消息可以获取
+      console.log("获取聊天室历史消息成功", list, hasMore);
+    });
+  }
+  /**
+   *得到聊天室人员信息
+   */
+  function getChatRoomInfo() {
+    chatRoom.getInfo().then(function (result) {
+      var userCount = result.userCount;
+      var userInfos = result.userInfos;
+      console.log("获取聊天室信息成功", userCount, userInfos);
     });
   }
 
