@@ -94,31 +94,21 @@ $(function () {
       $(".mute").toggle().siblings().hide();
     });
 
-  $("textarea").keydown(function (e) {
-    // let flag = true;
-    // if (flag) {
-    //   if (e.keyCode == 13 && e.altKey) {
-    //     console.log(2);
-    //     flag = false;
-    //   }
-    // } else {
-    //   if (e.keyCode == 13) {
-    //     $("textarea").val("");
-    //     e.preventDefault();
-    //     flag = true;
-    //   }
-    // }
-    if (e.keyCode == 13) {
-      $("textarea").val("");
-      e.preventDefault();
-      flag = true;
-    }
-  });
-  // $("textarea").blur(function () {
-  //   $("textarea").val("");
+  // $("textarea").keydown(function (e) {
+  //   if (e.keyCode == 13) {
+  //     $("textarea").val("");
+  //     e.preventDefault();
+  //     flag = true;
+  //   }
   // });
-  // 定时器
+  $(".bottom-btn").click(function (e) {
+    e.preventDefault();
+    let userText = $("#userText").val();
+    console.log(userText);
+    sendChatRoom(userText);
 
+    // $("#userText").val("");
+  });
   var divHour = $("#divHour"); //时
   var divMin = $("#divMin"); //分
   var divSec = $("#divSec"); //秒

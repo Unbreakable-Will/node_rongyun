@@ -33,7 +33,6 @@ module.exports.userRegistered = (req, res) => {
       //   userId: "HWVMP4", // 融云返回的用户id
       //   username: "200", // 用户自己输入的用户id
       // };
-
       let user = {
         //用户唯一id
         onlyId: generateMixed(6),

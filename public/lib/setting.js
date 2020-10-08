@@ -25,6 +25,11 @@ im.watch({
   message: function (event) {
     var message = event.message;
     console.log("收到新消息", message);
+    // console.log(message.type);
+    if (message.type == 4) {
+      $(".center").html(message.content.content);
+      console.log(message.content.content);
+    }
   },
   status: function (event) {
     var status = event.status;

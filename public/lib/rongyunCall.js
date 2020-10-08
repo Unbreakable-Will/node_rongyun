@@ -6,6 +6,28 @@ var config = {
 };
 rongCallLib = RongCallLib.init(config);
 
+// 发起通话
+// 您可以直接给 mediaType 赋值 （ MEDIA_AUDIO: 1, MEDIA_VEDIO: 2 ）
+
+var targetId = "QMWBW1";
+var inviteUserIds = ["DNNZDM"];
+var CallType = {
+  MEDIA_AUDIO: 1,
+  MEDIA_VEDIO: 2,
+};
+var params = {
+  conversationType: RongIMLib.CONVERSATION_TYPE.PRIVATE,
+  targetId: targetId,
+  inviteUserIds: inviteUserIds,
+  mediaType: CallType.MEDIA_AUDIO,
+};
+
+rongCallLib.call(params, function (error) {
+  if (error) {
+    console.error("发起通话失败", error);
+  }
+});
+
 // 视频监听;
 var videoWatcher = function (result) {
   var type = result.type;
@@ -27,5 +49,6 @@ rongCallLib.videoWatch(videoWatcher);
 var commandWatcher = function (message) {
   var messageType = message.messageType;
   // 根据消息类型做对应处理
+  console.log(messageType);
 };
 rongCallLib.commandWatch(commandWatcher);
