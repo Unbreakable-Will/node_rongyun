@@ -90,11 +90,13 @@ function joinChatRoom() {
       console.log("加入聊天室成功");
     });
 }
-$("#userText").keypress(function (e) {
-  if (e.keyCode == 13) {
-    sendChatRoom("123");
-  }
-});
+// 发送消息,在metting里面写了
+// $("#userText").keypress(function (e) {
+//   if (e.keyCode == 13) {
+//     $(this).val();
+//     // sendChatRoom("123");
+//   }
+// });
 
 /**
  *

@@ -38,7 +38,7 @@ $(function () {
       var num2 = 600 / 192;
       $(".chat .center ").css("height", num2 + "rem");
       var num3 = 150 / 192;
-    //   $(".chat .bottom-text ").css("height", num3 + "rem");
+      //   $(".chat .bottom-text ").css("height", num3 + "rem");
       $(".chat textarea").css("height", num3 + "rem");
 
       console.log(111);
@@ -95,13 +95,28 @@ $(function () {
     });
 
   $("textarea").keydown(function (e) {
+    // let flag = true;
+    // if (flag) {
+    //   if (e.keyCode == 13 && e.altKey) {
+    //     console.log(2);
+    //     flag = false;
+    //   }
+    // } else {
+    //   if (e.keyCode == 13) {
+    //     $("textarea").val("");
+    //     e.preventDefault();
+    //     flag = true;
+    //   }
+    // }
     if (e.keyCode == 13) {
       $("textarea").val("");
+      e.preventDefault();
+      flag = true;
     }
   });
-  $("textarea").blur(function () {
-    $("textarea").val("");
-  });
+  // $("textarea").blur(function () {
+  //   $("textarea").val("");
+  // });
   // 定时器
 
   var divHour = $("#divHour"); //时
@@ -136,4 +151,6 @@ $(function () {
     $("#divMin").text(txtMin);
     $("#divHour").text(txtHour);
   }, 1000);
+
+  //发送消息按钮
 });
