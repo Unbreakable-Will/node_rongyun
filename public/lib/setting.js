@@ -1,4 +1,3 @@
-
 // IMLib SDK初始化
 var im = RongIMLib.init({
   appkey: "cpj2xarlchlzn",
@@ -91,11 +90,13 @@ function joinChatRoom() {
       console.log("加入聊天室成功");
     });
 }
-$("#userText").keypress(function (e) {
-  if (e.keyCode == 13) {
-    sendChatRoom("123");
-  }
-});
+// 发送消息,在metting里面写了
+// $("#userText").keypress(function (e) {
+//   if (e.keyCode == 13) {
+//     $(this).val();
+//     // sendChatRoom("123");
+//   }
+// });
 
 /**
  *
@@ -159,4 +160,3 @@ function getQueryVariable(variable) {
   return false;
 }
 //#endregion
-
