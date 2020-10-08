@@ -54,7 +54,7 @@ module.exports.findMeetingUser = (meetingId , callback) => {
 //查询会议中成员个数
 module.exports.findCountUser = (meetingId , callback) => {
     //创建sql语句
-    let sql = `select count(*) from imweb_join where meetingId = "${meetingId}"`;
+    let sql = `select count(*) userCount from imweb_join where meetingId = "${meetingId}"`;
 
     //查询数据库
     pool.query(sql,function(error,results){

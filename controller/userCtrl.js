@@ -97,6 +97,8 @@ module.exports.userJoins = (req, res) => {
 }
 
 
+
+
 //显示会议中人员列表
 module.exports.showUsers = (req, res) => {
   //获取会议id
@@ -106,19 +108,18 @@ module.exports.showUsers = (req, res) => {
 
 
   //查询数据库中  所有meetingId相同的人员
-  findMeetingUser(meetingId, function (results) {
-    let list = {};
-    list.users = results;
+  findMeetingUser(meetingId, function (users) {
     //查询数据库中 所有meetingId相同人员个数
-    findCountUser(meetingId, (results) => {
-      list.count = results;
-    })
-
-    console.log(list);
-    return res.send({
-      code: 200,
-      msg: '人员数据获取成功',
-      result: list
+    findCountUser(meetingId, function (count) {
+      let list = {};
+      list.users = users;
+      list.count = count;
+      console.log(list);
+      return res.send({
+        code: 200,
+        msg: '人员数据获取成功',
+        result: list
+      })
     })
   })
 }
