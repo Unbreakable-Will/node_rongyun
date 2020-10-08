@@ -51,15 +51,15 @@ module.exports.userRegistered = (req, res) => {
         //用户唯一id
         onlyId: generateMixed(6),
         //状态码
-        code: result.code,
+        code: result.log_code,
         //加入会议ID
         meetingId: req.body.meetingId,
         //用户头像
         touXiang: touXiangURL,
         //token
-        token: result.token,
+        token: result.log_token,
         //融云返回的用户id
-        userId: result.userId,
+        userId: result.log_userId,
         //用户id
         username: req.body.username,
       }
@@ -71,6 +71,8 @@ module.exports.userRegistered = (req, res) => {
 
   });
 }
+
+
 
 
 //加入会议
@@ -140,7 +142,6 @@ module.exports.getUserInfo = (req, res) => {
     data: req.session.user,
   });
 };
-
 
 
 
