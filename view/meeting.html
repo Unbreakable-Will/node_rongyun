@@ -104,7 +104,9 @@
                                 <img src="http://hd215.api.yesapi.cn/?s=Ext.Avatar.Show&app_key=BA6BBB3D9C90B515C6CAF6310D2BFFB4&nickname=叶良辰"
                                     alt="">
                             </div>
-                            <div class="member-name"> 叶良辰 <div class="job">(主持人 , 我)</div>
+                            <div class="member-text">
+                                <span class="member-name"> 叶良辰 </span>
+                                <span class="job">(主持人 , 我)</span>
                             </div>
                             <div class="status">
                                 <div class="status-mute cursor"> 解除静音 </div>
@@ -118,7 +120,9 @@
                                 <img src="http://hd215.api.yesapi.cn/?s=Ext.Avatar.Show&app_key=BA6BBB3D9C90B515C6CAF6310D2BFFB4&nickname=龙傲天"
                                     alt="">
                             </div>
-                            <div class="member-name"> 龙傲天 <div class="job">(主持人 , 我)</div>
+                            <div class="member-text">
+                                <span class="member-name"> 龙傲天 </span>
+                                <span class="job">(主持人 , 我)</span>
                             </div>
                             <div class="status">
                                 <div class="status-mute cursor"> 解除静音 </div>
@@ -137,7 +141,12 @@
                 </div>
                 <div class="chat">
                     <div class="top"> 聊天 </div>
-                    <div class="center"></div>
+                    <div class="center">
+                        <!-- <div class="message">
+              <p class="name">龙傲天: </p>
+              <p class="">11111111111</p>
+            </div> -->
+                    </div>
                     <div class="bottom">
                         <div class="bottom-top">
                             <div class="top-text"> 发送至: <span class="cursor">所有人 <div class="corner"></div></span>
@@ -146,7 +155,7 @@
                             </div>
                         </div>
                         <div class="bottom-text">
-                            <textarea placeholder="请输入消息..." id="userText"></textarea>
+                            <textarea placeholder="请输入消息..."></textarea>
                         </div>
                         <div class="bottom-btn">
                             <span class="cursor"> 发送(S)&nbsp;&nbsp; <i></i> <span
@@ -169,6 +178,12 @@
             <span class="invite"> https://meeting.com </span>
             <div class="title-main">参会者ID: </div>
             <span class="userID">351545</span>
+        </div>
+        <div class="revise">
+            <span class="iconfont icon-guanbi"></span>
+            <div class="revise-title">修改名称</div>
+            <input type="text" value="" \>
+            <button>确认</button>
         </div>
         <!-- <div class="key7-click">
             <div class="doc">文档(1)</div>
@@ -240,5 +255,6 @@
 <!-- 引入融云call -->
 <script src="/lib/rongyunCall.js"></script>
 <script src="/js/meeting.js"></script>
+
 
 </html>
