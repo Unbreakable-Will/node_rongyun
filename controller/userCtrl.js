@@ -33,6 +33,14 @@ module.exports.userRegistered = (req, res) => {
   getTouXiang(urlencode(req.body.username), function (touXiangURL) {
     //调用融云SDK获取Token
     registered(id, req.body.username, touXiangURL, function (result) {
+      result.onlyId = id;
+      result.meetingId = req.body.meetingId;
+      result.username = req.body.username;
+      result.createTime = new Date().toLocaleDateString();
+      console.log(result);
+      if(result.code == 200){
+        
+      }
 
       // result = {
       //   code: 200, // 融云返回的code
@@ -45,28 +53,17 @@ module.exports.userRegistered = (req, res) => {
       //   username: "200", // 用户自己输入的用户id
       // };
 
-
-      let user = {
-
-        //用户唯一id
-        onlyId: generateMixed(6),
-        //状态码
-        code: result.log_code,
-        //加入会议ID
-        meetingId: req.body.meetingId,
-        //用户头像
-        touXiang: touXiangURL,
-        //token
-        token: result.log_token,
-        //融云返回的用户id
-        userId: result.log_userId,
-        //用户id
-        username: req.body.username,
-      }
-      //添加到session中
-      req.session.user = user;
-      //发送 
-      return res.send(user);
+      let meetingId = result.meetingId;
+      // console.log(meetingId);
+      // 保存到session中
+      req.session.user = result;
+      // 保存聊天室房间号同时创建
+      req.session.user.chatRoom = createChatroom(meetingId);
+      //session里面存的数据应该放到数据库里面的
+      // 下面的/api/getUserInfo会请求数据库拿数据的
+      // console.log(req.session);
+      // console.log(result);
+      return res.send(result);
     });
 
   });
@@ -151,8 +148,8 @@ module.exports.getUserInfo = (req, res) => {
 module.exports.meetings = (req, res) => {
   // console.log(req.session.user);
   //添加到数据库中
-  addUser(req.session.user, function (results) {
-    console.log('添加成功');
-  });
+  // addUser(req.session.user, function (results) {
+  //   console.log('添加成功');
+  // });
   res.render("meeting.html");
 }

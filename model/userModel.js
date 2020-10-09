@@ -13,7 +13,7 @@ module.exports.addCreateUser = (data , callback) => {
     //删除末尾,
     values = values.slice(0,-1);
     pool.query(`
-    INSERT INTO imweb_login(log_onlyId, log_code, log_meetingId, log_portrait, log_token, log_userId, log_username, log_status, log_createTime) VALUES (${values})
+    INSERT INTO imweb_login(log_onlyId, log_code, log_userId , log_token , log_portrait , log_meetingId,  log_username , log_createTime) VALUES (${values})
     ` 
     ,function(error,results){
         if(error) throw error;
@@ -51,7 +51,7 @@ module.exports.addJoinUser = (data , callback) => {
     //删除末尾,
     values = values.slice(0,-1);
     pool.query(`
-    INSERT INTO imweb_login(join_onlyId, join_meetingId, join_portrait, join_username, join_status, join_time) VALUES (${values})
+    INSERT INTO imweb_login(join_onlyId, join_meetingId, join_portrait, join_username , join_time) VALUES (${values})
     ` 
     ,function(error,results){
         if(error) throw error;
