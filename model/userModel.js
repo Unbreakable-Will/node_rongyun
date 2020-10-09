@@ -13,7 +13,7 @@ module.exports.addCreateUser = (data , callback) => {
     //删除末尾,
     values = values.slice(0,-1);
     pool.query(`
-    INSERT INTO imweb_login(log_onlyId, log_code, log_userId , log_token , log_portrait , log_meetingId,  log_username , log_createTime) VALUES (${values})
+    INSERT INTO imweb_login(log_code, log_userId , log_token , log_portrait , log_onlyId , log_meetingId,  log_username , log_createTime) VALUES (${values})
     ` 
     ,function(error,results){
         if(error) throw error;

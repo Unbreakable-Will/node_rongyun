@@ -7,7 +7,7 @@ const {
 } = require('../sdkConfig/user');
 
 const {
-  addUser,
+  addCreateUser,
   findMeetingId,
   findMeetingUser,
   findCountUser
@@ -16,7 +16,7 @@ const {
 //导入方法
 const {
   generateMixed,
-  getTouXiang
+  getTouXiang,
 } = require('../config/func');
 
 
@@ -33,13 +33,37 @@ module.exports.userRegistered = (req, res) => {
   getTouXiang(urlencode(req.body.username), function (touXiangURL) {
     //调用融云SDK获取Token
     registered(id, req.body.username, touXiangURL, function (result) {
-      result.onlyId = id;
+      //继续生成onlyid
+      let onlyid = generateMixed(6);
+      result.onlyId = onlyid;
       result.meetingId = req.body.meetingId;
       result.username = req.body.username;
-      result.createTime = new Date().toLocaleDateString();
+
+      //日期转换
+      Date.prototype.Format = function (fmt) { // author: meizz
+        var o = {
+          "M+": this.getMonth() + 1, // 月份
+          "d+": this.getDate(), // 日
+          "h+": this.getHours(), // 小时
+          "m+": this.getMinutes(), // 分
+          "s+": this.getSeconds(), // 秒
+          "q+": Math.floor((this.getMonth() + 3) / 3), // 季度
+          "S": this.getMilliseconds() // 毫秒
+        };
+        if (/(y+)/.test(fmt))
+          fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+          if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+      }
+
+      result.createTime = new Date().Format("yyyy-MM-dd hh:mm:ss");;
       console.log(result);
-      if(result.code == 200){
-        
+      if (result.code == 200) {
+        // 添加到数据库中
+        addCreateUser(result, function (results) {
+          console.log('添加成功');
+        });
       }
 
       // result = {
@@ -147,9 +171,6 @@ module.exports.getUserInfo = (req, res) => {
 //会议页面渲染
 module.exports.meetings = (req, res) => {
   // console.log(req.session.user);
-  //添加到数据库中
-  // addUser(req.session.user, function (results) {
-  //   console.log('添加成功');
-  // });
+
   res.render("meeting.html");
 }
