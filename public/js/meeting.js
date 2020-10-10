@@ -1,20 +1,5 @@
-
+var div = document.querySelector(".center");
 $(function () {
-  $("body").click(function () {
-    $(".key7-click").hide();
-    $(".key4-click").hide();
-    $(".share").hide();
-    $(".camera").hide();
-    $(".mute").hide();
-  });
-
-  $(".box-click")
-    .children()
-    .click(function (e) {
-      e.stopPropagation();
-
-      console.log($(this));
-    });
   $(".left1").mouseover(function () {
     $(".left1-click").show();
     console.log(111);
@@ -24,14 +9,10 @@ $(function () {
     $(".left1-click").hide();
   });
 
-  $(".key7").click(function (e) {
-    e.stopPropagation();
-    console.log(111);
-    $(".key7-click").toggle().siblings().hide();
-  });
-
   $(".key6").click(function () {
     $(".member").toggle().siblings().hide();
+    div.scrollTop = div.scrollHeight;
+
     // console.log($(".member").css("display") == "none");
     if ($(".member").css("display") == "none") {
       var num = 780 / 192;
@@ -61,63 +42,6 @@ $(function () {
     $(this).find(".status span").show();
   });
 
-  $("textarea").bind("input propertychange", function () {
-    if ($("textarea").val() != "") {
-      $(".bottom-text>span").addClass("fasong");
-    } else {
-      $(".bottom-text>span").removeClass("fasong");
-    }
-  });
-
-  $(".key4").click(function (e) {
-    e.stopPropagation();
-    $(".key4-click").toggle().siblings().hide();
-  });
-
-  $(".key3")
-    .next()
-    .click(function (e) {
-      e.stopPropagation();
-      $(".share").toggle().siblings().hide();
-    });
-
-  $(".key2")
-    .next()
-    .click(function (e) {
-      e.stopPropagation();
-      $(".camera").toggle().siblings().hide();
-    });
-
-  $(".key1")
-    .next()
-    .click(function (e) {
-      e.stopPropagation();
-      $(".mute").toggle().siblings().hide();
-    });
-
-  $("textarea").keydown(function (e) {
-    // let flag = true;
-    // if (flag) {
-    //   if (e.keyCode == 13 && e.altKey) {
-    //     console.log(2);
-    //     flag = false;
-    //   }
-    // } else {
-    //   if (e.keyCode == 13) {
-    //     $("textarea").val("");
-    //     e.preventDefault();
-    //     flag = true;
-    //   }
-    // }
-    if (e.keyCode == 13) {
-      $("textarea").val("");
-      e.preventDefault();
-      flag = true;
-    }
-  });
-  // $("textarea").blur(function () {
-  //   $("textarea").val("");
-  // });
   // 定时器
 
   var divHour = $("#divHour"); //时
@@ -153,5 +77,87 @@ $(function () {
     $("#divHour").text(txtHour);
   }, 1000);
 
-  //发送消息按钮
+  //   点击改名
+
+  $(".rename").click(function () {
+    $(".revise").show();
+    var oldtext = $(this).parent().prev().find(".member-name").text().trim();
+    // console.log($(this).parent().prev().prev().find('img').attr('src'));
+    var img = $(this).parent().prev().prev().find("img");
+    var name = $(this).parent().prev().find(".member-name");
+    var input = $(".revise").find("input");
+    var btn = $(".revise").find("button");
+    input.val(oldtext);
+    // console.log(input);
+    // var flag = true;
+    input.keyup(function () {
+      console.log(input.val().length);
+      var newtext = input.val();
+      if (input.val().length == 0) {
+        btn.css("background-color", "#80b7ff");
+        btn.attr("disabled", true);
+        // flag = false;
+      } else {
+        // flag = true;
+        btn.css("background-color", "#006fff");
+        btn.attr("disabled", false);
+        btn.on("click", function () {
+          $(".revise").hide();
+          name.text(newtext);
+          $(".main .member-name").text(newtext);
+          $(".touxiang img").attr(
+            "src",
+            "http://hd215.api.yesapi.cn/?s=Ext.Avatar.Show&app_key=BA6BBB3D9C90B515C6CAF6310D2BFFB4&nickname=" +
+              newtext
+          );
+          // console.log(
+          img.attr(
+            "src",
+            "http://hd215.api.yesapi.cn/?s=Ext.Avatar.Show&app_key=BA6BBB3D9C90B515C6CAF6310D2BFFB4&nickname=" +
+              newtext
+          );
+          // );
+        });
+      }
+      // console.log(111);
+    });
+    btn.on("click", function () {
+      $(".revise").hide();
+    });
+    $(".revise")
+      .find("span")
+      .click(function () {
+        $(".revise").hide();
+      });
+  });
+});
+
+// 发送消息
+$(function () {
+  var str = "";
+  var name = $(".main .member-name").text();
+
+  $("#bottom-btn").click(function (e) {
+    var text = $("textarea").val();
+
+    e.preventDefault();
+    var myDate = new Date();
+    var newdate = myDate.toLocaleString();
+    var mytime = myDate.toLocaleTimeString();
+    console.log(newdate);
+    console.log(text);
+
+    // 发送消息
+    sendChatRoom(text);
+    $("textarea").val("");
+
+    // str += `<div class="message">
+    //   <p class="name">${name}: ${mytime}</p>
+    //   <p class="">${text}</p>
+    //    </div>
+    //   `;
+    // $(".chat .center").append(str);
+
+    div.scrollTop = div.scrollHeight;
+  });
 });

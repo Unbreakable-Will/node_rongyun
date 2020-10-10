@@ -13,7 +13,7 @@ module.exports.addCreateUser = (data , callback) => {
     //删除末尾,
     values = values.slice(0,-1);
     pool.query(`
-    INSERT INTO imweb_login(log_code, log_userId , log_token , log_portrait , log_onlyId , log_meetingId,  log_username , log_createTime) VALUES (${values})
+    INSERT INTO imweb_login(log_userId, log_code, log_token, log_returnId) VALUES (${values})
     ` 
     ,function(error,results){
         if(error) throw error;
@@ -27,7 +27,7 @@ module.exports.addCreateUser = (data , callback) => {
 //查找会议
 module.exports.findMeetingId = (meetingId , callback) => {
     //创建数据库语句
-    let sql = `select meetingId from imweb_login where log_meetingId = "${meetingId}"`;
+    let sql = `select join_meetingId from imweb_join where join_meetingId = "${meetingId}"`;
 
     //查询数据库
     pool.query(sql,function(error,results){
@@ -105,3 +105,63 @@ module.exports.addStatus = (userId , type , callback) => {
         callback(results);
     })
 }
+
+
+
+//根据姓名 查找数据
+module.exports.findUserByName = (username) => {
+    //创建sql语句
+    let sql = `select * from imweb_join where join_username = '${username}'`;
+
+    //查询数据库
+    pool.query(sql,function(error,results){
+        if(error) throw error;
+
+        callback(results);
+    });
+}
+
+
+
+//修改姓名
+module.exports.rename = (userId , username , callback) => {
+    //创建sql语句
+    let sql = `update imweb_join set join_username = '${username}' where join_onlyId = '${userId}'`;
+
+    //查询数据库
+    pool.query(sql,function(error , results){
+        if(error) throw error;
+
+        callback(results);
+    });
+}
+
+
+
+//通过融云返回的id 查找用户id
+module.exports.findUserIdByIMId = (id , callback) => {
+    //创建sql语句
+    let sql = `select log_userId from imweb_login where log_returnId = '${id}'`;
+
+    //查询数据库
+    pool.query(sql,function(error , results){
+        if(error) throw error;
+
+        callback(results);
+    });
+}
+
+
+//通过用户id 查找用户姓名
+module.exports.findUsernameById = (id , callback) => {
+    //创建sql语句
+    let sql = `select join_username from imweb_join where join_onlyId = '${id}'`;
+
+    //查询数据库
+    pool.query(sql,function(error , results){
+        if(error) throw error;
+
+        callback(results);
+    });
+}
+

@@ -1,4 +1,5 @@
 const urlencode = require('urlencode');
+const moment = require('moment');
 
 //引入user模块
 const {
@@ -8,9 +9,14 @@ const {
 
 const {
   addCreateUser,
+  addJoinUser,
   findMeetingId,
   findMeetingUser,
-  findCountUser
+  findCountUser,
+  rename,
+  addStatus,
+  findUserIdByIMId,
+  findUsernameById
 } = require('../model/userModel');
 
 //导入方法
@@ -34,35 +40,39 @@ module.exports.userRegistered = (req, res) => {
     //调用融云SDK获取Token
     registered(id, req.body.username, touXiangURL, function (result) {
       //继续生成onlyid
-      let onlyid = generateMixed(6);
-      result.onlyId = onlyid;
+      result.onlyId = generateMixed(6);
       result.meetingId = req.body.meetingId;
       result.username = req.body.username;
 
-      //日期转换
-      Date.prototype.Format = function (fmt) { // author: meizz
-        var o = {
-          "M+": this.getMonth() + 1, // 月份
-          "d+": this.getDate(), // 日
-          "h+": this.getHours(), // 小时
-          "m+": this.getMinutes(), // 分
-          "s+": this.getSeconds(), // 秒
-          "q+": Math.floor((this.getMonth() + 3) / 3), // 季度
-          "S": this.getMilliseconds() // 毫秒
-        };
-        if (/(y+)/.test(fmt))
-          fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-        for (var k in o)
-          if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-        return fmt;
-      }
-
-      result.createTime = new Date().Format("yyyy-MM-dd hh:mm:ss");;
-      console.log(result);
+      result.createTime = moment().format('YYYY-MM-DD HH:mm:ss');
+      // console.log(result.createTime);
+      // console.log(result);
+      //判断状态码
       if (result.code == 200) {
+        //创建变量
+        let createUser = {
+          userId: result.onlyId,
+          code: result.code,
+          token: result.token,
+          returnId: result.userId
+        };
+
+        let joinUser = {
+          onlyId: result.onlyId,
+          meetingId: result.meetingId,
+          portrait: touXiangURL,
+          username: result.username,
+          time: result.createTime
+        };
+
         // 添加到数据库中
-        addCreateUser(result, function (results) {
+        addCreateUser(createUser, function (results) {});
+        addJoinUser(joinUser, function (results) {
           console.log('添加成功');
+
+        });
+        addStatus(result.onlyId, '主持人', function (results) {
+          console.log('添加状态成功');
         });
       }
 
@@ -89,37 +99,8 @@ module.exports.userRegistered = (req, res) => {
       // console.log(result);
       return res.send(result);
     });
-
   });
 }
-
-
-
-
-//加入会议
-module.exports.userJoins = (req, res) => {
-  //获取数据
-  let {
-    meetingId
-  } = req.body;
-
-  //查询数据库  找到meetingId相同的会议
-  findMeetingId(meetingId, (results) => {
-    if (results) {
-      return res.send({
-        code: 200,
-        msg: '加入成功',
-      });
-    } else {
-      return res.send({
-        code: 400,
-        msg: '加入失败',
-      });
-    }
-  });
-}
-
-
 
 
 //显示会议中人员列表
@@ -166,6 +147,102 @@ module.exports.getUserInfo = (req, res) => {
 
 
 
+
+//发送融云的的id转成用户输入的姓名
+module.exports.changeUserId = (req, res) => {
+  //获取用户输入id
+  let {
+    userId
+  } = req.body;
+
+  if(!userId) return;
+
+  //调用数据库
+  findUserIdByIMId(userId , (result) => {
+    let id = result;
+    findUsernameById(id , (result) => {
+      res.send({
+        code : 200,
+        msg : '获取成功',
+        data : result,
+      });
+    })
+  });
+}
+
+
+//用户加入会议
+//参数 : 会议id  用户姓名
+module.exports.joinUser = (req, res) => {
+  //获取用户的加入会议id 和 姓名
+  let {
+    meetingId,
+  } = req.body;
+
+  //判断是否存在此会议
+  findMeetingId(meetingId, function (result) {
+    if (result) {
+      //获取头像
+      getTouXiang(urlencode(req.body.username), function (touXiangURL) {
+        //创建user
+        let user = {
+          onlyId: generateMixed(6),
+          meetingId: meetingId,
+          portrait: touXiangURL,
+          username: req.body.username,
+          time: moment().format('YYYY-MM-DD HH:mm:ss')
+        };
+
+        //添加对象
+        addJoinUser(user, function (result) {});
+        //添加状态
+        addStatus(user.onlyId, '成员', function (result) {});
+
+        res.send({
+          code: 200,
+          msg: '添加成功'
+        });
+      });
+    } else {
+      res.send({
+        code: 500,
+        msg: '添加失败'
+      });
+    }
+  });
+}
+
+
+
+//修改姓名
+//参数: 原有姓名  新建姓名
+module.exports.reusername = (req, res) => {
+  //获取原有姓名
+  let {
+    beforeName,
+    nowName
+  } = req.body;
+
+
+  //调用数据库方法
+  findUserByName(beforeName, function (result) {
+    //判断是否存在此姓名
+    if (result.join_username) {
+      //存在 则更新数据库
+      rename(result.join_onlyId , nowName , function(result){
+        res.send({
+          code : 200,
+          msg : '修改成功'
+        });
+      });
+    }else{
+      res.send({
+        code : 400,
+        msg : '没有此用户'
+      })
+    }
+  })
+}
 
 
 //会议页面渲染
