@@ -57,10 +57,14 @@ module.exports.userRegistered = (req, res) => {
   });
 };
 
+
+
 //加入会议
 module.exports.userJoins = (req, res) => {
   //获取数据
-  let { meetingId } = req.body;
+  let {
+    meetingId
+  } = req.body;
 
   //查询数据库  找到meetingId相同的会议
   findMeetingId(meetingId, (results) => {
@@ -78,10 +82,15 @@ module.exports.userJoins = (req, res) => {
   });
 };
 
+
+
 //显示会议中人员列表
 module.exports.showUsers = (req, res) => {
   //获取会议id
-  let { meetingId } = req.query;
+  let {
+    meetingId
+  } = req.query;
+
 
   //查询数据库中  所有meetingId相同的人员
   findMeetingUser(meetingId, function (results) {
@@ -92,6 +101,7 @@ module.exports.showUsers = (req, res) => {
     });
   });
 };
+
 
 // 获取用户数据
 module.exports.getUserInfo = (req, res) => {

@@ -4,6 +4,8 @@ $(function () {
   $("#join").click(function (e) {
     e.preventDefault();
     $(".join-box").show();
+    
+    // console.log(1);
   });
 
   //加入按钮
