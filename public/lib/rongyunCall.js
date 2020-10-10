@@ -22,11 +22,11 @@ var params = {
   mediaType: CallType.MEDIA_AUDIO,
 };
 
-rongCallLib.call(params, function (error) {
-  if (error) {
-    console.error("发起通话失败", error);
-  }
-});
+// rongCallLib.call(params, function (error) {
+//   if (error) {
+//     console.error("发起通话失败", error);
+//   }
+// });
 
 // 视频监听;
 var videoWatcher = function (result) {

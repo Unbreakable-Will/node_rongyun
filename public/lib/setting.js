@@ -26,9 +26,10 @@ im.watch({
     var message = event.message;
     console.log("收到新消息", message);
     // console.log(message.type);
+    //成功收到消息
     if (message.type == 4) {
-      $(".center").html(message.content.content);
-      console.log(message.content.content);
+      // $(".center").html(message.content.content);
+      showUserInfo(message);
     }
   },
   status: function (event) {
@@ -117,6 +118,7 @@ function sendChatRoom(userText) {
     })
     .then(function (message) {
       console.log("发送文字消息成功", message);
+      showUserInfo(message);
     });
 }
 
@@ -149,6 +151,30 @@ function getChatRoomInfo() {
 //#endregion
 
 //#region  函数方法存放
+
+/**
+ * 渲染用户发送的消息
+ */
+function showUserInfo(message) {
+  //用户名
+  let name = getQueryVariable("username");
+  // decodeURI 解码中文
+  let str = `
+   <div class="message">
+   <p class="name">${message.senderUserId}: ${dayjs(message.sentTime).format(
+    "hh:mm:ss"
+  )}</p>
+   <p class="">${message.content.content}</p>
+   </div>
+  `;
+
+  console.log(str);
+
+  $(".center").append(str);
+  //让右边的进度条跟着滚动
+  div.scrollTop = div.scrollHeight;
+}
+
 /**
  *
  * @param {string} variable 传入网页参数

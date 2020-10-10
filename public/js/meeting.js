@@ -135,27 +135,29 @@ $(function () {
 // 发送消息
 $(function () {
   var str = "";
-
   var name = $(".main .member-name").text();
-  $("textarea").keypress(function (e) {
-    var text = $("textarea").val();
-    if (e.keyCode == 13 && text.trim() != "") {
-      e.preventDefault();
-      var myDate = new Date();
-      var newdate = myDate.toLocaleString();
-      var mytime = myDate.toLocaleTimeString();
-      console.log(newdate);
-      console.log(text);
-      $("textarea").val("");
-      str += `<div class="message">
-      <p class="name">${name}: ${mytime}</p>
-      <p class="">${text}</p>
-    </div>
-      `;
-      $(".chat .center").html(str);
-      console.log(str);
 
-      div.scrollTop = div.scrollHeight;
-    }
+  $("#bottom-btn").click(function (e) {
+    var text = $("textarea").val();
+
+    e.preventDefault();
+    var myDate = new Date();
+    var newdate = myDate.toLocaleString();
+    var mytime = myDate.toLocaleTimeString();
+    console.log(newdate);
+    console.log(text);
+
+    // 发送消息
+    sendChatRoom(text);
+    $("textarea").val("");
+
+    // str += `<div class="message">
+    //   <p class="name">${name}: ${mytime}</p>
+    //   <p class="">${text}</p>
+    //    </div>
+    //   `;
+    // $(".chat .center").append(str);
+
+    div.scrollTop = div.scrollHeight;
   });
 });
