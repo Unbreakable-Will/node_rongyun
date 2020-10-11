@@ -15,6 +15,7 @@ const {
   findCountUser,
   rename,
   addStatus,
+  findUserByName,
   findUserIdByIMId,
   findUsernameById
 } = require('../model/userModel');
@@ -49,6 +50,7 @@ module.exports.userRegistered = (req, res) => {
       // console.log(result);
       //判断状态码
       if (result.code == 200) {
+        console.log(result);
         //创建变量
         let createUser = {
           userId: result.onlyId,
@@ -104,6 +106,7 @@ module.exports.userRegistered = (req, res) => {
 
 
 //显示会议中人员列表
+//参数:meetingId
 module.exports.showUsers = (req, res) => {
   //获取会议id
   let {
@@ -149,6 +152,7 @@ module.exports.getUserInfo = (req, res) => {
 
 
 //发送融云的的id转成用户输入的姓名
+//参数 : 融云id
 module.exports.changeUserId = (req, res) => {
   //获取用户输入id
   let {
@@ -172,24 +176,26 @@ module.exports.changeUserId = (req, res) => {
 
 
 //用户加入会议
-//参数 : 会议id  用户姓名
+//参数 : 会议id meetingId  用户姓名 username
 module.exports.joinUser = (req, res) => {
+  console.log(req.query);
   //获取用户的加入会议id 和 姓名
   let {
     meetingId,
-  } = req.body;
+    username
+  } = req.query;
 
   //判断是否存在此会议
   findMeetingId(meetingId, function (result) {
     if (result) {
       //获取头像
-      getTouXiang(urlencode(req.body.username), function (touXiangURL) {
+      getTouXiang(urlencode(req.query.username), function (touXiangURL) {
         //创建user
         let user = {
           onlyId: generateMixed(6),
           meetingId: meetingId,
           portrait: touXiangURL,
-          username: req.body.username,
+          username: req.query.username,
           time: moment().format('YYYY-MM-DD HH:mm:ss')
         };
 
@@ -215,19 +221,20 @@ module.exports.joinUser = (req, res) => {
 
 
 //修改姓名
-//参数: 原有姓名  新建姓名
+//参数: 原有姓名 beforeName  新建姓名 nowName
 module.exports.reusername = (req, res) => {
+  console.log(req.body);
   //获取原有姓名
   let {
     beforeName,
     nowName
   } = req.body;
 
-
+  console.log(beforeName);
   //调用数据库方法
   findUserByName(beforeName, function (result) {
     //判断是否存在此姓名
-    if (result.join_username) {
+    if (result) {
       //存在 则更新数据库
       rename(result.join_onlyId , nowName , function(result){
         res.send({

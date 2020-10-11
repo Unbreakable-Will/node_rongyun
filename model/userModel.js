@@ -51,7 +51,7 @@ module.exports.addJoinUser = (data , callback) => {
     //删除末尾,
     values = values.slice(0,-1);
     pool.query(`
-    INSERT INTO imweb_login(join_onlyId, join_meetingId, join_portrait, join_username , join_time) VALUES (${values})
+    INSERT INTO imweb_join(join_onlyId, join_meetingId, join_portrait, join_username , join_time) VALUES (${values})
     ` 
     ,function(error,results){
         if(error) throw error;
@@ -109,7 +109,7 @@ module.exports.addStatus = (userId , type , callback) => {
 
 
 //根据姓名 查找数据
-module.exports.findUserByName = (username) => {
+module.exports.findUserByName = (username , callback) => {
     //创建sql语句
     let sql = `select * from imweb_join where join_username = '${username}'`;
 
