@@ -184,7 +184,7 @@ function showUserInfo(message) {
   console.log(message);
   let str = `
    <div class="message">
-   <p class="name">${name}: ${dayjs(message.sentTime).format("hh:mm:ss")}</p>
+   <p class="name">${name}: ${dayjs(message.sentTime).format("HH:mm:ss")}</p>
    <p class="">${message.content.content}</p>
    </div>
   `;

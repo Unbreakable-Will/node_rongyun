@@ -2,10 +2,10 @@ var div = document.querySelector(".center");
 $(function () {
   $(".left1").mouseover(function () {
     $(".left1-click").show();
-    console.log(111);
+    // console.log(111);
   });
   $(".left1").mouseout(function () {
-    console.log(222);
+    // console.log(222);
     $(".left1-click").hide();
   });
 
@@ -148,8 +148,10 @@ $(function () {
     console.log(text);
 
     // 发送消息
-    sendChatRoom(text);
-    $("textarea").val("");
+    if (text.trim()) {
+      sendChatRoom(text);
+      $("textarea").val("");
+    }
 
     // str += `<div class="message">
     //   <p class="name">${name}: ${mytime}</p>
@@ -162,25 +164,3 @@ $(function () {
   });
 });
 
-// ajax 请求
-$(function () {
-  var userid = window.location.search.split("&")[0].split("=")[1];
-  console.log(userid);
-  $.ajax({
-    type: "POST", //默认get
-    url: "/user/changeId", //默认当前页
-    data: {
-      userId: userid,
-    }, //格式{key:value}
-    success: function (response) {
-      //请求成功回调
-      console.log(response.data);
-    },
-    error: function (e) {
-      //请求超时回调
-      if (e.statusText == "timeout") {
-        alert("请求超时");
-      }
-    },
-  });
-});

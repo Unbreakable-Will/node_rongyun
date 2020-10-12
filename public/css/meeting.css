@@ -373,8 +373,6 @@
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 article,
@@ -781,24 +779,9 @@ body {
   margin-right: 0.05208rem;
 }
 
-.container-fluid .row .row-left .main .left-center .touxiang {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0.38542rem;
-  height: 0.38542rem;
-  margin-top: -0.19271rem;
-  margin-left: -0.19271rem;
-}
-
-.container-fluid .row .row-left .main .left-center .touxiang img {
-  width: 0.38542rem;
-  height: 0.38542rem;
-}
-
-.container-fluid .row .row-left .main .left-center .touxiang .member-name {
-  font-size: 0.07292rem;
-  text-align: center;
+.container-fluid .row .row-left .main iframe {
+  width: 100%;
+  height: 4.0625rem;
 }
 
 .container-fluid .row .row-left .main .bottom-key {
@@ -807,65 +790,46 @@ body {
   width: 100%;
   bottom: 0.15625rem;
   left: 0;
-}
-
-.container-fluid .row .row-left .main .bottom-key .box {
-  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding-left: 0.41667rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.container-fluid .row .row-left .main .bottom-key .box .key {
-  float: left;
-  width: 0.41667rem;
-  height: 0.36458rem;
-  margin-left: 0.05208rem;
-  text-align: center;
-  border-radius: 0.02604rem;
-  padding-top: 0.04167rem;
-  font-size: 0.0625rem;
+.container-fluid .row .row-left .main .bottom-key input {
+  width: 500px;
+  height: 30px;
 }
 
-.container-fluid .row .row-left .main .bottom-key .box .key span {
-  font-size: 0.10417rem;
+.container-fluid .row .row-left .main .bottom-key input:focus {
+  outline: none;
 }
 
-.container-fluid .row .row-left .main .bottom-key .box .key:hover {
-  background-color: #e0e2e5;
-}
-
-.container-fluid .row .row-left .main .bottom-key .box .key div {
-  font-size: 0.0625rem;
-  line-height: 0.125rem;
-}
-
-.container-fluid .row .row-left .main .bottom-key .box .glyphicon {
-  display: block;
-  font-size: 0.0625rem;
-  line-height: 0.21875rem;
-  float: left;
-  height: 0.27083rem;
-}
-
-.container-fluid .row .row-left .main .bottom-key .end {
-  position: absolute;
-  right: 0.15625rem;
-  bottom: 0;
-  width: 0.39583rem;
-  height: 0.1875rem;
-  border: 1px solid #ff5151;
-  color: #ff5151;
-  border-radius: 0.02604rem;
-  font-size: 0.07292rem;
-  text-align: center;
-  line-height: 0.1875rem;
-}
-
-.container-fluid .row .row-left .main .bottom-key .end:hover {
+.container-fluid .row .row-left .main .bottom-key button {
+  height: 30px;
+  margin-left: 10px;
+  width: 50px;
+  border: none;
+  border-radius: 5px;
   color: #fff;
-  background-color: #ff5151;
+  background-color: #409eff;
+  opacity: 0.5;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.container-fluid .row .row-left .main .bottom-key button:hover {
+  background-color: #409eff;
+  opacity: 1;
+}
+
+.container-fluid .row .row-left .main .bottom-key button:focus {
+  outline: none;
 }
 
 .container-fluid .row .row-right {
@@ -932,10 +896,28 @@ body {
   height: 0.16667rem;
 }
 
-.container-fluid .row .row-right .member .member-list li .member-name {
+.container-fluid .row .row-right .member .member-list li .member-text {
   float: left;
+  position: relative;
+}
+
+.container-fluid .row .row-right .member .member-list li .member-text .member-name {
   margin-left: 0.05208rem;
   font-size: 0.0625rem;
+}
+
+.container-fluid .row .row-right .member .member-list li .member-text .member-name input {
+  font-size: 12px;
+}
+
+.container-fluid .row .row-right .member .member-list li .member-text .job {
+  width: 66px;
+  font-size: 12px;
+  position: absolute;
+  left: 0;
+  top: 18px;
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
 }
 
 .container-fluid .row .row-right .member .member-list li .status {
@@ -1034,6 +1016,19 @@ body {
   width: 100%;
   background-color: #fff;
   border-bottom: 0.00521rem solid #e5e5e5;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.container-fluid .row .row-right .chat .center .message {
+  margin: 0;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.container-fluid .row .row-right .chat .center .message p {
+  padding: 0;
+  margin: 0;
 }
 
 .container-fluid .row .row-right .chat .bottom {
@@ -1103,31 +1098,28 @@ body {
 .container-fluid .row .row-right .chat .bottom .bottom-btn {
   position: absolute;
   height: 0.13542rem;
-  bottom: 0;
+  bottom: 10px;
   right: 0.05208rem;
 }
 
 .container-fluid .row .row-right .chat .bottom .bottom-btn span {
-  color: #888888;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100px;
+  height: 30px;
+  background-color: #67c23a;
+  border-radius: 5px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #fff;
   font-size: 0.0625rem;
   margin-right: 0.10417rem;
   line-height: 0.13542rem;
-}
-
-.container-fluid .row .row-right .chat .bottom .bottom-btn span i {
-  position: absolute;
-  width: 0.00521rem;
-  height: 0.125rem;
-  background-color: #888;
-}
-
-.container-fluid .row .row-right .chat .bottom .bottom-btn span span {
-  color: #888888;
-  line-height: 0.02604rem;
-  margin-left: 0.05208rem;
-  padding-left: 0.05208rem;
-  margin-top: 0.03646rem;
-  font-size: 0.0625rem;
 }
 
 .box-click .left1-click {
@@ -1162,6 +1154,54 @@ body {
   left: 0.52083rem;
   color: #000;
   margin-top: -0.15625rem;
+}
+
+.box-click .revise {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 200px;
+  margin-left: -150px;
+  margin-top: -100px;
+  background-color: #fff;
+  -webkit-box-shadow: -2px -2px 10px #ccc;
+          box-shadow: -2px -2px 10px #ccc;
+}
+
+.box-click .revise span {
+  float: right;
+}
+
+.box-click .revise span:hover {
+  background-color: #ccc;
+}
+
+.box-click .revise .revise-title {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.box-click .revise input {
+  width: 100%;
+  margin-top: 30px;
+  height: 40px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+
+.box-click .revise button {
+  width: 90%;
+  background-color: #6a6f75;
+  border: none;
+  outline: none;
+  margin-top: 30px;
+  margin-left: 5%;
+  height: 30px;
+  color: #fff;
 }
 
 .box-click .key7-click {
