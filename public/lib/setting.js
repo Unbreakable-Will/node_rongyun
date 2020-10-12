@@ -25,7 +25,7 @@ im.watch({
   message: function (event) {
     var message = event.message;
     console.log("收到新消息", message);
-    // console.log(message.type);
+    console.log(message.type);
     //成功收到消息
     if (message.type == 4) {
       // $(".center").html(message.content.content);
@@ -157,13 +157,34 @@ function getChatRoomInfo() {
  */
 function showUserInfo(message) {
   //用户名
-  let name = getQueryVariable("username");
+  // let name = getQueryVariable("username");
+  // let name = "";
+  // var userid = window.location.search.split("&")[0].split("=")[1];
+  // console.log(userid);
+  let name = "";
+  $.ajax({
+    async: false, //改同步获取
+    type: "method",
+    type: "POST", //默认get
+    url: "/user/changeId", //默认当前页
+    data: {
+      // message.senderUserId
+      // id: getQueryVariable(id),
+      userId: message.senderUserId,
+    }, //格式{key:value}
+    success: function (response) {
+      console.log(response);
+      //请求成功回调
+      name = response.data;
+    },
+  });
+
+  // ajax 通过随机id获取用户输入的id
   // decodeURI 解码中文
+  console.log(message);
   let str = `
    <div class="message">
-   <p class="name">${message.senderUserId}: ${dayjs(message.sentTime).format(
-    "hh:mm:ss"
-  )}</p>
+   <p class="name">${name}: ${dayjs(message.sentTime).format("hh:mm:ss")}</p>
    <p class="">${message.content.content}</p>
    </div>
   `;

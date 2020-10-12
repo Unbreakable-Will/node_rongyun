@@ -139,7 +139,7 @@ $(function () {
 
   $("#bottom-btn").click(function (e) {
     var text = $("textarea").val();
-
+    console.log(111);
     e.preventDefault();
     var myDate = new Date();
     var newdate = myDate.toLocaleString();
@@ -159,5 +159,28 @@ $(function () {
     // $(".chat .center").append(str);
 
     div.scrollTop = div.scrollHeight;
+  });
+});
+
+// ajax 请求
+$(function () {
+  var userid = window.location.search.split("&")[0].split("=")[1];
+  console.log(userid);
+  $.ajax({
+    type: "POST", //默认get
+    url: "/user/changeId", //默认当前页
+    data: {
+      userId: userid,
+    }, //格式{key:value}
+    success: function (response) {
+      //请求成功回调
+      console.log(response.data);
+    },
+    error: function (e) {
+      //请求超时回调
+      if (e.statusText == "timeout") {
+        alert("请求超时");
+      }
+    },
   });
 });
