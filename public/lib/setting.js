@@ -164,7 +164,6 @@ function showUserInfo(message) {
   let name = "";
   $.ajax({
     async: false, //改同步获取
-    type: "method",
     type: "POST", //默认get
     url: "/user/changeId", //默认当前页
     data: {
@@ -179,7 +178,7 @@ function showUserInfo(message) {
     },
   });
 
-  // ajax 通过随机id获取用户输入的id
+  // ajax 通过随机id获取用户输入的id 
   // decodeURI 解码中文
   console.log(message);
   let str = `
@@ -193,6 +192,8 @@ function showUserInfo(message) {
 
   $(".center").append(str);
   //让右边的进度条跟着滚动
+  var div = document.querySelector(".center");
+
   div.scrollTop = div.scrollHeight;
 }
 
