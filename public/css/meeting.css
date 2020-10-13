@@ -779,15 +779,9 @@ body {
   margin-right: 0.05208rem;
 }
 
-.container-fluid .row .row-left .main .left-center {
-  background-image: url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1602588812328&di=38a22e937aba80e7e3fc2706c0091505&imgtype=0&src=http%3A%2F%2Fimg.pptjia.com%2Fimage%2F20190418%2Fe3a4aebc0ded9a9b80a49c71f32f86d4.JPG");
-  background-size: 100% 100%;
-  height: 854px;
-}
-
 .container-fluid .row .row-left .main .left-center iframe {
   width: 100%;
-  height: 4.0625rem;
+  height: 4.44792rem;
 }
 
 .container-fluid .row .row-left .main .left-center ul {
