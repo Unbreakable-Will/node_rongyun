@@ -779,7 +779,7 @@ body {
   margin-right: 0.05208rem;
 }
 
-.container-fluid .row .row-left .main iframe {
+.container-fluid .row .row-left .main .left-center iframe {
   width: 100%;
   height: 4.0625rem;
 }
