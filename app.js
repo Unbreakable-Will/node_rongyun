@@ -42,7 +42,7 @@ app.engine("html", ejs.renderFile);
 app.use(
     session({
       secret: "keyboard cat",
-      name: "rongYun",
+      name: "diting",
       resave: false,
       saveUninitialized: true,
       cookie: { maxAge: 99999999999999999 }, //单位ms
