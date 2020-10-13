@@ -784,6 +784,37 @@ body {
   height: 4.0625rem;
 }
 
+.container-fluid .row .row-left .main .left-center ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container-fluid .row .row-left .main .left-center li {
+  border: 1px solid #ccc;
+  padding: 25px;
+}
+
+.container-fluid .row .row-left .main .left-center li h2 {
+  width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.container-fluid .row .row-left .main .left-center li img {
+  width: 1.5625rem;
+  height: 0.88021rem;
+}
+
 .container-fluid .row .row-left .main .bottom-key {
   position: absolute;
   height: 0.28125rem;
@@ -1380,4 +1411,3 @@ body {
   width: 0.10417rem;
   margin: 0 0.05208rem;
 }
-/*# sourceMappingURL=meeting.css.map */

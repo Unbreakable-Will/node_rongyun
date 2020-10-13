@@ -1,5 +1,6 @@
 @import "./commont";
 $bastfont: 192;
+
 .cursor {
   cursor: pointer;
 }
@@ -7,6 +8,7 @@ $bastfont: 192;
 .container-fluid {
   border: 1px solid #dedede;
   height: 100%;
+
   .title {
     height: 41rem / $bastfont;
     width: 1920rem / $bastfont;
@@ -15,9 +17,11 @@ $bastfont: 192;
     line-height: 41rem / $bastfont;
     background-color: #fafafa;
   }
+
   .row {
     height: 880rem / $bastfont;
     width: 1920rem / $bastfont;
+
     .row-left {
       margin: 0;
       padding: 0;
@@ -29,6 +33,7 @@ $bastfont: 192;
         height: 26rem / $bastfont;
         border: 1rem / $bastfont solid #ced0d2;
         background-color: #edeff2;
+
         .icon {
           width: 20rem / $bastfont;
           height: 20rem / $bastfont;
@@ -39,41 +44,51 @@ $bastfont: 192;
           margin-left: 8rem / $bastfont;
           line-height: 20rem / $bastfont;
           text-align: center;
+
           span {
             font-size: 12rem / $bastfont;
           }
         }
+
         .icon:hover {
           background-color: #e0e2e5;
         }
+
         .left1 {
           color: #5e6166;
         }
+
         .left2 {
           color: #006fff;
         }
+
         .left3 {
           color: #00cc66;
         }
+
         .right1 {
           float: right;
           width: 68rem / $bastfont;
           height: 20rem / $bastfont;
           font-size: 12rem / $bastfont;
           padding-left: 4rem / $bastfont;
+
           div,
           span {
             float: left;
           }
         }
+
         .right1:hover {
           background-color: #edeff2;
         }
+
         .right2 {
           float: right;
           margin-right: 10rem / $bastfont;
         }
       }
+
       .main {
         .left-center {
           iframe {
@@ -83,6 +98,32 @@ $bastfont: 192;
 
             // background-color: red;
           }
+
+          // 新闻列表显示
+          ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+          }
+
+          li {
+            h2 {
+              width: 240px;
+              overflow: hidden; //超出的文本隐藏
+              text-overflow: ellipsis; //用省略号显示
+              white-space: nowrap; //不换行
+            }
+
+            border: 1px solid #ccc;
+            padding: 25px;
+
+            img {
+              width: 300rem/$bastfont;
+              height: 169rem/$bastfont;
+            }
+          }
+
 
           // .touxiang {
           //   position: absolute;
@@ -114,6 +155,7 @@ $bastfont: 192;
           justify-content: center;
           // justifly-content:center;
           align-items: center;
+
           // form {
           input {
             width: 500px;
@@ -143,14 +185,17 @@ $bastfont: 192;
             // margin-top: -15px;
             // left: 630px;
             transition: all 0.3s;
+
             &:hover {
               background-color: #409eff;
               opacity: 1;
             }
+
             &:focus {
               outline: none;
             }
           }
+
           // }
 
           // .box {
@@ -209,10 +254,12 @@ $bastfont: 192;
         }
       }
     }
+
     .row-right {
       margin: 0;
       padding: 0;
       height: 880rem / $bastfont;
+
       .member {
         display: none;
         width: 100%;
@@ -226,53 +273,64 @@ $bastfont: 192;
           text-align: center;
           line-height: 30rem / $bastfont;
         }
+
         .member-search {
           height: 30rem / $bastfont;
           width: 400rem / $bastfont;
           border: 1px solid #e0e2e5;
           margin-top: 14rem / $bastfont;
           margin-left: 12rem / $bastfont;
+
           input {
             border: none;
             width: 100%;
             height: 100%;
             font-size: 12rem / $bastfont;
             padding-left: 24rem / $bastfont;
+
             &:focus {
               outline: none;
             }
           }
         }
+
         .member-list {
           width: 100%;
           height: 200rem / $bastfont;
           overflow-x: hidden;
           overflow-y: auto;
+
           li {
             margin-top: 12rem / $bastfont;
             width: 100%;
             height: 34rem / $bastfont;
             margin-left: 18rem / $bastfont;
+
             .member-icon {
               float: left;
+
               img {
                 width: 32rem / $bastfont;
                 height: 32rem / $bastfont;
               }
             }
+
             .member-text {
               float: left;
               position: relative;
+
               .member-name {
                 // float: left;
                 // display: inline;
                 margin-left: 10rem / $bastfont;
                 font-size: 12rem / $bastfont;
+
                 input {
                   // height: 14px;
                   font-size: 12px;
                 }
               }
+
               .job {
                 width: 66px;
                 font-size: 12px;
@@ -283,13 +341,16 @@ $bastfont: 192;
                 transform: scale(0.8);
               }
             }
+
             .status {
               float: right;
               margin-right: 6 0rem / $bastfont;
               margin-top: 10rem / $bastfont;
+
               div:hover {
                 background-color: #1a8cff;
               }
+
               div {
                 display: none;
                 float: left;
@@ -303,16 +364,20 @@ $bastfont: 192;
                 text-align: center;
                 height: 28rem / $bastfont;
               }
+
               .status-mute {
                 width: 80rem / $bastfont;
                 margin-right: 20rem / $bastfont;
               }
+
               .rename {
                 width: 56rem / $bastfont;
               }
+
               .icon-yuyinhuatong {
                 margin-right: 20rem / $bastfont;
               }
+
               span {
                 font-size: 20rem / $bastfont;
                 margin-right: 60rem / $bastfont;
@@ -320,6 +385,7 @@ $bastfont: 192;
             }
           }
         }
+
         .member-btn {
           width: 100%;
           height: 60rem / $bastfont;
@@ -340,22 +406,26 @@ $bastfont: 192;
             text-align: center;
             border: 1rem / $bastfont solid #e4e5e6;
             margin-top: 15rem / $bastfont;
+
             // margin-right: 32rem / $bastfont;
             span {
               font-size: 12rem / $bastfont;
               transform: scale(0.6);
             }
+
             &:hover {
               background-color: #e0e2e5;
             }
           }
         }
       }
+
       .chat {
         display: block !important;
         width: 100%;
         height: 880rem / $bastfont;
         font-size: 12rem / $bastfont;
+
         // margin-top: 20rem / $bastfont;
         .top {
           width: 100%;
@@ -367,6 +437,7 @@ $bastfont: 192;
           text-align: center;
           line-height: 30rem / $bastfont;
         }
+
         .center {
           height: 600rem / $bastfont;
           width: 100%;
@@ -374,26 +445,32 @@ $bastfont: 192;
           border-bottom: 1rem / $bastfont solid #e5e5e5;
           overflow-x: hidden;
           overflow-y: auto;
+
           .message {
             // padding: 0;
             margin: 0;
             padding-left: 10px;
             padding-top: 10px;
+
             p {
               padding: 0;
               margin: 0;
             }
           }
         }
+
         .bottom {
           height: 280rem / $bastfont;
           width: 100%;
+
           .bottom-top {
+
             // height: 200rem / $bastfont;
             .top-text {
               float: left;
               line-height: 45rem / $bastfont;
               font-weight: bold;
+
               span {
                 color: #006fff;
               }
@@ -409,12 +486,14 @@ $bastfont: 192;
                 border-right-color: transparent;
               }
             }
+
             .power {
               float: right;
               line-height: 45rem / $bastfont;
               font-weight: bold;
               color: #006fff;
               margin-right: 30rem / $bastfont;
+
               .corner {
                 float: right;
                 margin-top: 20rem / $bastfont;
@@ -427,9 +506,11 @@ $bastfont: 192;
               }
             }
           }
+
           .bottom-text {
             width: 450rem / $bastfont;
             padding: 4rem / $bastfont;
+
             textarea {
               margin: 0rem / $bastfont;
               width: 456rem / $bastfont;
@@ -439,16 +520,19 @@ $bastfont: 192;
               font-size: 12rem / $bastfont;
               resize: none;
             }
+
             .fasong {
               color: #006fff;
             }
           }
+
           .bottom-btn {
             position: absolute;
             height: 26rem / $bastfont;
             // background-color: #0f0;
             bottom: 10px;
             right: 10rem / $bastfont;
+
             span {
               display: flex;
               // margin-bottom: 20px;
@@ -465,7 +549,7 @@ $bastfont: 192;
               font-size: 12rem / $bastfont;
               margin-right: 20rem / $bastfont;
               line-height: 26rem / $bastfont;
-            
+
             }
           }
         }
@@ -487,17 +571,20 @@ $bastfont: 192;
     padding-left: 16rem / $bastfont;
     box-shadow: 2rem / $bastfont 2rem / $bastfont 5rem / $bastfont #888888;
     font-size: 12rem / $bastfont;
+
     .title {
       margin-top: 14rem / $bastfont;
       font-size: 12rem / $bastfont;
       font-weight: bold;
       margin-bottom: 10rem / $bastfont;
     }
+
     .title-main {
       font-size: 12rem / $bastfont;
       color: #cecece;
       margin-bottom: 10rem / $bastfont;
     }
+
     span {
       position: absolute;
       left: 100rem / $bastfont;
@@ -517,16 +604,20 @@ $bastfont: 192;
     margin-top: -100px;
     background-color: #fff;
     box-shadow: -2px -2px 10px #ccc;
+
     span {
       float: right;
+
       &:hover {
         background-color: #ccc;
       }
     }
+
     .revise-title {
       text-align: center;
       margin-top: 30px;
     }
+
     input {
       width: 100%;
       margin-top: 30px;
@@ -536,6 +627,7 @@ $bastfont: 192;
       border-bottom: 1px solid #ccc;
       text-align: center;
     }
+
     button {
       width: 90%;
       background-color: #6a6f75;
@@ -548,6 +640,7 @@ $bastfont: 192;
       color: #fff;
     }
   }
+
   .key7-click {
     display: none;
     position: absolute;
@@ -557,6 +650,7 @@ $bastfont: 192;
     height: 54rem / $bastfont;
     box-shadow: 2rem / $bastfont 2rem / $bastfont 5rem / $bastfont #888888;
     background-color: #fff;
+
     div {
       line-height: 26rem / $bastfont;
       font-size: 12rem / $bastfont;
@@ -574,9 +668,11 @@ $bastfont: 192;
     background-color: #fff;
     box-shadow: 2rem / $bastfont 2rem / $bastfont 5rem / $bastfont #888888;
     padding-top: 10rem / $bastfont;
+
     li:first-child {
       color: #c9cbcc;
     }
+
     li {
       text-align: left;
       line-height: 24rem / $bastfont;
@@ -590,6 +686,7 @@ $bastfont: 192;
       }
     }
   }
+
   .share {
     display: none;
     position: absolute;
@@ -600,6 +697,7 @@ $bastfont: 192;
     background-color: #fff;
     box-shadow: -1px -1px 15px #888888;
     padding-top: 10rem / $bastfont;
+
     i {
       position: absolute;
       width: 0rem / $bastfont;
@@ -612,9 +710,11 @@ $bastfont: 192;
       margin-left: -10rem / $bastfont;
       bottom: -20rem / $bastfont;
     }
+
     li:first-child {
       color: #c9cbcc;
     }
+
     li {
       text-align: left;
       line-height: 24rem / $bastfont;
@@ -628,6 +728,7 @@ $bastfont: 192;
       }
     }
   }
+
   .camera {
     display: none;
     position: absolute;
@@ -638,6 +739,7 @@ $bastfont: 192;
     background-color: #fff;
     box-shadow: -1px -1px 15px #888888;
     padding-top: 10rem / $bastfont;
+
     i {
       position: absolute;
       width: 0rem / $bastfont;
@@ -650,9 +752,11 @@ $bastfont: 192;
       margin-left: -10rem / $bastfont;
       bottom: -20rem / $bastfont;
     }
+
     li:first-child {
       color: #939699;
     }
+
     li {
       text-align: left;
       line-height: 24rem / $bastfont;
@@ -666,6 +770,7 @@ $bastfont: 192;
       }
     }
   }
+
   .mute {
     display: none;
     position: absolute;
@@ -676,6 +781,7 @@ $bastfont: 192;
     background-color: #fff;
     box-shadow: -1px -1px 15px #888888;
     padding-top: 10rem / $bastfont;
+
     i {
       position: absolute;
       width: 0rem / $bastfont;
@@ -688,9 +794,11 @@ $bastfont: 192;
       margin-left: -10rem / $bastfont;
       bottom: -20rem / $bastfont;
     }
+
     li:first-child {
       color: #939699;
     }
+
     li {
       text-align: left;
       line-height: 24rem / $bastfont;
