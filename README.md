@@ -1,4 +1,18 @@
-# 谛听音乐聊天室
+# 谛听聊天室
+
+## 项目展示
+
+![1602591556944](D:\02-传智大学\flutter\node_rongyun\img\1602591556944.png)
+
+
+
+
+
+
+
+![1602591572988](D:\02-传智大学\flutter\node_rongyun\img\1602591572988.png)
+
+
 
 ## 前端技术栈
 
@@ -6,7 +20,7 @@
 - SCSS
 - JQuery
 - 融云 IM SDK
-- bootstrap  
+- bootstrap 
 - flexible 
 - dayjs
 
